@@ -27,4 +27,6 @@ export interface User {
 	status: string;
 }
 
+export * from './recursos_humanos.js';
+
 export type PlaygroundAction = (typeof playgroundActions)[number];
