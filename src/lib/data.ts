@@ -3,7 +3,9 @@
 
 import { API_URL, REMOTE_ASSETS_BASE_URL } from '../app/constants.js';
 import type { Endpoint, EndpointsToOperations } from '../types/entities.js';
-``
+
+export { getEmpleados } from './recursos_humanos/empleados.js';
+
 export async function fetchData<Selected extends Endpoint>(endpoint: Selected) {
 	const apiEndpoint = `${API_URL}${endpoint}`;
 
