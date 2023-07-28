@@ -2,14 +2,15 @@
 /* eslint max-lines: 'off' */
 
 import NavPagination from '../components/NavPagination.astro';
-import { asset, fetchData } from '../lib/data.js';
-
+import { getEmpleados } from '../lib/recursos_humanos/index.js';
+const query = Astro.url.searchParams.get('search')!;
+const page = Astro.url.searchParams.get('page')!;
 const { class: clazz } = Astro.props;
-const users = await fetchData('users');
+const empleados = await getEmpleados(query, page);
 ---
 
 <entities-crud
-	type="users"
+	type="empleados"
 	class:list={['block overflow-hidden shadow', clazz]}
 >
 	<div
@@ -35,7 +36,7 @@ const users = await fetchData('users');
 										d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
 									></path></svg
 								>
-								Home
+								Inicio
 							</a>
 						</li>
 						<li>
@@ -53,7 +54,7 @@ const users = await fetchData('users');
 								<a
 									href="#"
 									class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white"
-									>Users</a
+									>empleados</a
 								>
 							</div>
 						</li>
@@ -71,7 +72,7 @@ const users = await fetchData('users');
 								>
 								<span
 									class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500"
-									aria-current="page">List</span
+									aria-current="page">Lista</span
 								>
 							</div>
 						</li>
@@ -80,7 +81,7 @@ const users = await fetchData('users');
 				<h1
 					class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"
 				>
-					All users
+					Todos los empleados
 				</h1>
 			</div>
 			<div class="sm:flex">
@@ -88,75 +89,28 @@ const users = await fetchData('users');
 					class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700"
 				>
 					<form class="lg:pr-3" action="#" method="GET">
-						<label for="users-search" class="sr-only">Search</label>
+						<label for="empleados-search" class="sr-only">Busqueda</label>
 						<div class="relative mt-1 lg:w-64 xl:w-96">
 							<input
 								type="text"
 								name="email"
-								id="users-search"
+								id="empleados-search"
 								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-								placeholder="Search for users"
+								placeholder="Buscar empleados"
 							/>
 						</div>
 					</form>
 					<div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
+						
 						<a
 							href="#"
 							class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 						>
-							<svg
-								class="w-6 h-6"
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
 								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-								><path
-									fill-rule="evenodd"
-									d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-									clip-rule="evenodd"></path></svg
-							>
-						</a>
-						<a
-							href="#"
-							class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-						>
-							<svg
-								class="w-6 h-6"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-								><path
-									fill-rule="evenodd"
-									d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-									clip-rule="evenodd"></path></svg
-							>
-						</a>
-						<a
-							href="#"
-							class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-						>
-							<svg
-								class="w-6 h-6"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-								><path
-									fill-rule="evenodd"
-									d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-									clip-rule="evenodd"></path></svg
-							>
-						</a>
-						<a
-							href="#"
-							class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-						>
-							<svg
-								class="w-6 h-6"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-								><path
-									d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
-								></path></svg
+								viewBox="0 0 20 20">
+								<path d="M440-160q-17 0-28.5-11.5T400-200v-240L161-745q-14-17-4-36t31-19h584q21 0 31 19t-4 36L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-276 240-304H240l240 304Zm0 0Z"/>
+							</svg
 							>
 						</a>
 					</div>
@@ -187,7 +141,7 @@ const users = await fetchData('users');
 					</button> -->
 					<button
 						type="button"
-						data-modal-toggle="add-user-modal"
+						data-modal-toggle="add-empleado-modal"
 						class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 					>
 						<svg
@@ -200,24 +154,8 @@ const users = await fetchData('users');
 								d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
 								clip-rule="evenodd"></path></svg
 						>
-						Add user
+						Agregar empleado
 					</button>
-					<a
-						href="#"
-						class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-					>
-						<svg
-							class="w-5 h-5 mr-2 -ml-1"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-							xmlns="http://www.w3.org/2000/svg"
-							><path
-								fill-rule="evenodd"
-								d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
-								clip-rule="evenodd"></path></svg
-						>
-						Export
-					</a>
 				</div>
 			</div>
 		</div>
@@ -231,7 +169,7 @@ const users = await fetchData('users');
 					>
 						<thead class="bg-gray-100 dark:bg-gray-700">
 							<tr>
-								<th scope="col" class="p-4">
+								<!-- <th scope="col" class="p-4">
 									<div class="flex items-center">
 										<input
 											id="checkbox-all"
@@ -241,36 +179,36 @@ const users = await fetchData('users');
 										/>
 										<label for="checkbox-all" class="sr-only">checkbox</label>
 									</div>
+								</th> -->
+								<th
+									scope="col"
+									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+								>
+									Nombre
 								</th>
 								<th
 									scope="col"
 									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
 								>
-									Name
+									Fecha de nacimiento
 								</th>
 								<th
 									scope="col"
 									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
 								>
-									Biography
+									Fecha de contratacion
 								</th>
 								<th
 									scope="col"
 									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
 								>
-									Position
+									Localizacion
 								</th>
 								<th
 									scope="col"
 									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
 								>
-									Country
-								</th>
-								<th
-									scope="col"
-									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-								>
-									Status
+									Puesto
 								</th>
 								<th
 									scope="col"
@@ -284,60 +222,42 @@ const users = await fetchData('users');
 							class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
 						>
 							{
-								users.map((user) => (
+								empleados.map((empleado) => (
 									<div>
 										<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-											<td class="w-4 p-4">
-												<div class="flex items-center">
-													<input
-														id="checkbox-{{ .id }}"
-														aria-describedby="checkbox-1"
-														type="checkbox"
-														class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-													/>
-													<label for="checkbox-{{ .id }}" class="sr-only">
-														checkbox
-													</label>
-												</div>
-											</td>
-											<td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
+											<td class="flex justify-start items-center p-4 mr-12 space-x-6 whitespace-nowrap">
 												<img
-													class="w-10 h-10 rounded-full"
-													src={asset(`/images/users/${user.avatar}`)}
-													alt={`${user.name} avatar`}
+													class="w-10 h-10 rounded-full text-xs"
+													src={empleado.foto}
+													alt={`Foto`}
 												/>
 												<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-													<div class="text-base font-semibold text-gray-900 dark:text-white">
-														{user.name}
-													</div>
+													<a href={`./empleado/${empleado.id}`} class="text-base font-semibold text-gray-900 dark:text-white">
+														{empleado.nombre} {empleado.apellido_paterno} {empleado.apellido_materno}
+													</a>
 													<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-														{user.email}
+														{empleado.email}
 													</div>
 												</div>
 											</td>
 											<td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-												{user.biography}
+												{empleado.fecha_nacimiento}
 											</td>
 											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-												{user.position}
+												{empleado.fecha_contratacion}
 											</td>
 											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-												{user.country}
+												{empleado.ciudad} {empleado.estado}. {empleado.codigo_postal}
 											</td>
 											<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
 												<div class="flex items-center">
-													{user.status === 'Active' ? (
-														<div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2" />
-													) : (
-														<div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2" />
-													)}
-													{user.status}
+													{empleado.puesto}
 												</div>
 											</td>
 											<td class="p-4 space-x-2 whitespace-nowrap">
 												<button
 													type="button"
-													data-modal-toggle="edit-user-modal"
+													data-modal-toggle="edit-empleado-modal"
 													class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 												>
 													<svg
@@ -355,11 +275,11 @@ const users = await fetchData('users');
 															/>
 														</>
 													</svg>
-													Edit user
+													Editar empleado
 												</button>
 												<button
 													type="button"
-													data-modal-toggle="delete-user-modal"
+													data-modal-toggle="delete-empleado-modal"
 													class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
 												>
 													<svg
@@ -374,7 +294,7 @@ const users = await fetchData('users');
 															clip-rule="evenodd"
 														/>
 													</svg>
-													Delete user
+													Borrar empleado
 												</button>
 											</td>
 										</tr>
@@ -388,10 +308,10 @@ const users = await fetchData('users');
 		</div>
 	</div>
 
-	<!-- Edit User Modal -->
+	<!-- Edit empleado Modal -->
 	<div
 		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
-		id="edit-user-modal"
+		id="edit-empleado-modal"
 	>
 		<div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
 			<!-- Modal content -->
@@ -400,11 +320,11 @@ const users = await fetchData('users');
 				<div
 					class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700"
 				>
-					<h3 class="text-xl font-semibold dark:text-white">Edit user</h3>
+					<h3 class="text-xl font-semibold dark:text-white">Edit empleado</h3>
 					<button
 						type="button"
 						class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
-						data-modal-toggle="edit-user-modal"
+						data-modal-toggle="edit-empleado-modal"
 					>
 						<svg
 							class="w-5 h-5"
@@ -548,10 +468,10 @@ const users = await fetchData('users');
 		</div>
 	</div>
 
-	<!-- Add User Modal -->
+	<!-- Add empleado Modal -->
 	<div
 		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
-		id="add-user-modal"
+		id="add-empleado-modal"
 	>
 		<div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
 			<!-- Modal content -->
@@ -560,11 +480,11 @@ const users = await fetchData('users');
 				<div
 					class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700"
 				>
-					<h3 class="text-xl font-semibold dark:text-white">Add new user</h3>
+					<h3 class="text-xl font-semibold dark:text-white">Agregar un nuevo empleado</h3>
 					<button
 						type="button"
 						class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
-						data-modal-toggle="add-user-modal"
+						data-modal-toggle="add-empleado-modal"
 					>
 						<svg
 							class="w-5 h-5"
@@ -663,7 +583,7 @@ const users = await fetchData('users');
 					>
 						<button
 							class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-							type="submit">Add user</button
+							type="submit">Add empleado</button
 						>
 					</div>
 				</div>
@@ -671,10 +591,10 @@ const users = await fetchData('users');
 		</div>
 	</div>
 
-	<!-- Delete User Modal -->
+	<!-- Delete empleado Modal -->
 	<div
 		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
-		id="delete-user-modal"
+		id="delete-empleado-modal"
 	>
 		<div class="relative w-full h-full max-w-md px-4 md:h-auto">
 			<!-- Modal content -->
@@ -684,7 +604,7 @@ const users = await fetchData('users');
 					<button
 						type="button"
 						class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
-						data-modal-toggle="delete-user-modal"
+						data-modal-toggle="delete-empleado-modal"
 					>
 						<svg
 							class="w-5 h-5"
@@ -713,20 +633,20 @@ const users = await fetchData('users');
 							d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
 					>
 					<h3 class="mt-5 mb-6 text-lg text-gray-500 dark:text-gray-400">
-						Are you sure you want to delete this user?
+						Seguro que desea borrar a este empleado?
 					</h3>
 					<a
 						href="#"
 						class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800"
 					>
-						Yes, I'm sure
+						Yes, seguro
 					</a>
 					<a
 						href="#"
 						class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-						data-modal-toggle="delete-user-modal"
+						data-modal-toggle="delete-empleado-modal"
 					>
-						No, cancel
+						No, cancelar
 					</a>
 				</div>
 			</div>

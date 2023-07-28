@@ -14,7 +14,6 @@ const getEmpleados = async(query?:string, page?:string) => {
 	const request:RequestInit = {
 		method: 'GET'
 	};
-
 	const data = await getData(endpoint, request);
 	return data;
 }

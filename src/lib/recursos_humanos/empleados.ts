@@ -56,3 +56,11 @@ const patchEmpleado = async(num_empleado:number,body:Empleado) => {
 	const data = await getData(endpoint, request);
 	return data;
 }
+
+export {
+	getEmpleados,
+	postEmpleado,
+	patchEmpleado,
+	deleteEmpleado,
+	getEmpleado
+}
