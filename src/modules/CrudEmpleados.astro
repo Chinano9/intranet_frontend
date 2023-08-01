@@ -3,6 +3,7 @@
 
 import NavPagination from '../components/NavPagination.astro';
 import { getEmpleados } from '../lib/recursos_humanos/index.js';
+import type { Empleado } from '../types/recursos_humanos';
 const query = Astro.url.searchParams.get('search')!;
 const page = Astro.url.searchParams.get('page')!;
 const { class: clazz } = Astro.props;
@@ -153,7 +154,7 @@ const empleados = await getEmpleados(query, page);
 								fill-rule="evenodd"
 								d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
 								clip-rule="evenodd"></path></svg
-						>
+				>
 						Agregar empleado
 					</button>
 				</div>
@@ -222,7 +223,7 @@ const empleados = await getEmpleados(query, page);
 							class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
 						>
 							{
-								empleados.map((empleado) => (
+								empleados.map((empleado:Empleado) => (
 									<div>
 										<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
 											<td class="flex justify-start items-center p-4 mr-12 space-x-6 whitespace-nowrap">
@@ -258,6 +259,8 @@ const empleados = await getEmpleados(query, page);
 												<button
 													type="button"
 													data-modal-toggle="edit-empleado-modal"
+													data-id-empleado=`${empleado.id}`
+													data-nombre-empleado = `${empleado.nombre} ${empleado.apellido_paterno} ${empleado.apellido_materno}`
 													class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 												>
 													<svg
@@ -344,33 +347,46 @@ const empleados = await getEmpleados(query, page);
 						<div class="grid grid-cols-6 gap-6">
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									for="first-name"
+									for="nombre"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>First Name</label
+									>Nombre</label
 								>
 								<input
 									type="text"
-									name="first-name"
-									value="Bonnie"
-									id="first-name"
+									name="nombre"
+									id="nombre"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Bonnie"
+									placeholder="Nombre"
 									required
 								/>
 							</div>
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									for="last-name"
+									for="apellido_paterno"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>Last Name</label
+									>Apellido paterno</label
 								>
 								<input
 									type="text"
-									name="last-name"
-									value="Green"
-									id="last-name"
+									name="apellido_paterno"
+									id="apellido_paterno"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Green"
+									placeholder="Apellido paterno"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="apellido_materno"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+									>Apellido materno</label
+								>
+								<input
+									type="text"
+									name="apellido_materno"
+									id="apellido_materno"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									placeholder="Apellido materno"
 									required
 								/>
 							</div>
@@ -383,7 +399,6 @@ const empleados = await getEmpleados(query, page);
 								<input
 									type="email"
 									name="email"
-									value="bonnie@flowbite.com"
 									id="email"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 									placeholder="example@company.com"
@@ -470,7 +485,7 @@ const empleados = await getEmpleados(query, page);
 
 	<!-- Add empleado Modal -->
 	<div
-		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
+		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 mt-1 h-modal sm:h-full"
 		id="add-empleado-modal"
 	>
 		<div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
@@ -500,35 +515,53 @@ const empleados = await getEmpleados(query, page);
 				</div>
 				<!-- Modal body -->
 				<div class="p-6 space-y-6">
-					<form action="#">
+					<form>
 						<div class="grid grid-cols-6 gap-6">
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									for="first-name"
+									for="nombre"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>First Name</label
 								>
+									Nombre
+								</label>
 								<input
 									type="text"
-									name="first-name"
-									id="first-name"
+									name="nombre"
+									id="nombre"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Bonnie"
+									placeholder="Nombre"
 									required
 								/>
 							</div>
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									for="last-name"
+									for="apellido_paterno"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>Last Name</label
 								>
+									Apellido paterno
+								</label>
 								<input
 									type="text"
-									name="last-name"
-									id="last-name"
+									name="apellido_paterno"
+									id="apellido_paterno"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Green"
+									placeholder="Apellido paterno"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="apellido_materno"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Apellido materno
+								</label>
+								<input
+									type="text"
+									name="apellido_materno"
+									id="apellido_materno"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									placeholder="Apellido materno"
 									required
 								/>
 							</div>
@@ -536,8 +569,9 @@ const empleados = await getEmpleados(query, page);
 								<label
 									for="email"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>Email</label
 								>
+									Email
+								</label>
 								<input
 									type="email"
 									name="email"
@@ -549,31 +583,212 @@ const empleados = await getEmpleados(query, page);
 							</div>
 							<div class="col-span-6 sm:col-span-3">
 								<label
-									for="position"
+									for="fecha_nacimiento"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>Position</label
 								>
+									Fecha de Nacimiento
+								</label>
 								<input
-									type="text"
-									name="position"
-									id="position"
+									type="date"
+									name="fecha_nacimiento"
+									id="fecha_nacimiento"
 									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="e.g. React developer"
 									required
 								/>
 							</div>
-							<div class="col-span-6">
+							<div class="col-span-6 sm:col-span-3">
 								<label
-									for="biography"
+									for="fecha_contratacion"
 									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>Biography</label
 								>
-								<textarea
-									id="biography"
-									rows="4"
-									class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="👨‍💻Full-stack web developer. Open-source contributor."
-								></textarea>
+									Fecha de Contratación
+								</label>
+								<input
+									type="date"
+									name="fecha_contratacion"
+									id="fecha_contratacion"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="foto"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Foto
+								</label>
+								<input
+									type="file"
+									name="foto"
+									id="foto"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="ciudad"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Ciudad
+								</label>
+								<input
+									type="text"
+									name="ciudad"
+									id="ciudad"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="estado"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Estado
+								</label>
+								<input
+									type="text"
+									name="estado"
+									id="estado"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="codigo_postal"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Código Postal
+								</label>
+								<input
+									type="text"
+									name="codigo_postal"
+									id="codigo_postal"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="email"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Email
+								</label>
+								<input
+									type="email"
+									name="email"
+									id="email"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									placeholder="example@company.com"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="puesto"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Puesto
+								</label>
+								<input
+									type="text"
+									name="puesto"
+									id="puesto"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="tel_casa"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Teléfono de Casa
+								</label>
+								<input
+									type="tel"
+									name="tel_casa"
+									id="tel_casa"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="tel_cel"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Teléfono Celular
+								</label>
+								<input
+									type="tel"
+									name="tel_cel"
+									id="tel_cel"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="curp"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									CURP
+								</label>
+								<input
+									type="text"
+									name="curp"
+									id="curp"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="rfc"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									RFC
+								</label>
+								<input
+									type="text"
+									name="rfc"
+									id="rfc"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="seguro_social"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									NSS
+								</label>
+								<input
+									type="text"
+									name="seguro_social"
+									id="seguro_social"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
+							</div>
+							<div class="col-span-6 sm:col-span-3">
+								<label
+									for="sueldo_dia"
+									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+								>
+									Sueldo
+								</label>
+								<input
+									type="tel"
+									name="sueldo_dia"
+									id="sueldo_dia"
+									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+									required
+								/>
 							</div>
 						</div>
 					</form>
@@ -583,7 +798,7 @@ const empleados = await getEmpleados(query, page);
 					>
 						<button
 							class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-							type="submit">Add empleado</button
+							type="submit">Añadir empleado</button
 						>
 					</div>
 				</div>
@@ -639,7 +854,7 @@ const empleados = await getEmpleados(query, page);
 						href="#"
 						class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-800"
 					>
-						Yes, seguro
+						Si, seguro
 					</a>
 					<a
 						href="#"

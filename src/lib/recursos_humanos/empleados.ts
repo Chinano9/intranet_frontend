@@ -1,4 +1,5 @@
-import {url, getData} from '../utils'
+import {url, fetchData} from '../utils'
+import type { Empleado } from '../../types/recursos_humanos';
 
 const getEmpleados = async(query?:string, page?:string) => {
 	console.log('getEmpleados');
@@ -11,12 +12,12 @@ const getEmpleados = async(query?:string, page?:string) => {
 		method: 'GET'
 	};
 
-	const data = await getData(endpoint, request);
+	const data = await fetchData(endpoint, request);
 	return data;
 }
 
 const postEmpleado = async(body:Empleado) => {
-	console.log('getEmpleados');
+	console.log('postEmpleado');
 
 	const endpoint = `${url}empleados/`;
 
@@ -25,12 +26,12 @@ const postEmpleado = async(body:Empleado) => {
 		body:JSON.stringify(body)
 	};
 
-	const data = await getData(endpoint, request);
+	const data = await fetchData(endpoint, request);
 	return data;
 }
 
 const deleteEmpleado = async(num_empleado:number,body:Empleado) => {
-	console.log('getEmpleados');
+	console.log('deleteEmpleado');
 
 	const endpoint = `${url}empleados/${num_empleado}`;
 
@@ -39,12 +40,12 @@ const deleteEmpleado = async(num_empleado:number,body:Empleado) => {
 		body:JSON.stringify(body)
 	};
 
-	const data = await getData(endpoint, request);
+	const data = await fetchData(endpoint, request);
 	return data;
 }
 
 const patchEmpleado = async(num_empleado:number,body:Empleado) => {
-	console.log('getEmpleados');
+	console.log('patchEmpleado');
 
 	const endpoint = `${url}empleados/${num_empleado}`;
 
@@ -53,7 +54,20 @@ const patchEmpleado = async(num_empleado:number,body:Empleado) => {
 		body:JSON.stringify(body)
 	};
 
-	const data = await getData(endpoint, request);
+	const data = await fetchData(endpoint, request);
+	return data;
+}
+
+const getEmpleado =async (num_empleado:number) => {
+	console.log('getEmpleado');
+
+	const endpoint = `${url}empleados/${num_empleado}`;
+
+	const request:RequestInit = {
+		method: 'GET'
+	};
+
+	const data = await fetchData(endpoint, request);
 	return data;
 }
 

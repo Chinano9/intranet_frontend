@@ -18,7 +18,7 @@ const getEmpleados = async(query?:string, page?:string) => {
 	return data;
 }
 
-const postEmpleado = async(body:Empleado) => {
+const postEmpleado = async(body:any) => {
 	console.log('getEmpleados');
 
 	const endpoint = `${url}empleados/`;
