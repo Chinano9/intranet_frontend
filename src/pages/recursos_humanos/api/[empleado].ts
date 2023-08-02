@@ -3,7 +3,7 @@ import {
 	getEmpleado,
 	patchEmpleado,
 	deleteEmpleado,
-} from '../../../lib/recursos_humanos';
+} from '../../../lib/recursos_humanos/index';
 
 export const get: APIRoute = async ({ params, request }) => {
 	const { empleado } = params;
