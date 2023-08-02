@@ -4,7 +4,7 @@
 import NavPagination from '../components/NavPagination.astro';
 import { getEmpleados } from '../lib/recursos_humanos/index.js';
 import type { Empleado } from '../types/recursos_humanos';
-const query = Astro.url.searchParams.get('search')!;
+const query = Astro.url.searchParams.get('query')!;
 const page = Astro.url.searchParams.get('page')!;
 const { class: clazz } = Astro.props;
 const empleados = await getEmpleados(query, page);
@@ -94,11 +94,20 @@ const empleados = await getEmpleados(query, page);
 						<div class="relative mt-1 lg:w-64 xl:w-96">
 							<input
 								type="text"
-								name="email"
+								name="query"
 								id="empleados-search"
 								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 								placeholder="Buscar empleados"
 							/>
+							<label for="search_button">
+								<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M796-121 533-384q-30 26-69.959 40.5T378-329q-108.162 0-183.081-75Q120-479 120-585t75-181q75-75 181.5-75t181 75Q632-691 632-584.85 632-542 618-502q-14 40-42 75l264 262-44 44ZM377-389q81.25 0 138.125-57.5T572-585q0-81-56.875-138.5T377-781q-82.083 0-139.542 57.5Q180-666 180-585t57.458 138.5Q294.917-389 377-389Z"/></svg>
+							</label>
+							<input
+								type="submit"
+								id="search_button"
+								class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+								set:text=""
+								/>
 						</div>
 					</form>
 					<div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
