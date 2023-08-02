@@ -5,7 +5,8 @@ const getEmpleados = async(query?:string, page?:string) => {
 	console.log('getEmpleados');
 
 	let endpoint = `${url}empleados/?`;
-	if (query) endpoint += `query=${query}&`; 
+	if (query) endpoint += `query=${query}`;
+	console.log(query) 
 	if (page) endpoint += `page=${page}`; 
 
 	const request:RequestInit = {

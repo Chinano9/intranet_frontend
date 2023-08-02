@@ -1,6 +1,6 @@
 export type Empleados = Empleado[];
 export interface Empleado {
-  id: number;
+  id: number
   planta: string;
   nombre: string;
   jefe_directo: Empleado | null;
