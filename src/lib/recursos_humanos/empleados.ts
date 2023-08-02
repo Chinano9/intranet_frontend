@@ -20,10 +20,13 @@ const getEmpleados = async(query?:string, page?:string) => {
 const postEmpleado = async(body:Empleado) => {
 	console.log('postEmpleado');
 
-	const endpoint = `${url}empleados/`;
+	const endpoint = `${url}empleados/nuevo/`;
 
 	const request:RequestInit = {
 		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json; charset=UTF-8',
+		},
 		body:JSON.stringify(body)
 	};
 
@@ -37,7 +40,7 @@ const deleteEmpleado = async(num_empleado:number,body:Empleado) => {
 	const endpoint = `${url}empleados/${num_empleado}`;
 
 	const request:RequestInit = {
-		method: 'PATCH',
+		method: 'DELETE',
 		body:JSON.stringify(body)
 	};
 

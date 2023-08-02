@@ -7,7 +7,8 @@ import type { Empleado } from '../types/recursos_humanos';
 const query = Astro.url.searchParams.get('query')!;
 const page = Astro.url.searchParams.get('page')!;
 const { class: clazz } = Astro.props;
-const empleados = await getEmpleados(query, page);
+const queryset = await getEmpleados(query, page);
+const empleados = queryset['results']
 ---
 
 <entities-crud
@@ -91,27 +92,27 @@ const empleados = await getEmpleados(query, page);
 				>
 					<form class="lg:pr-3" action="#" method="GET">
 						<label for="empleados-search" class="sr-only">Busqueda</label>
-						<div class="relative mt-1 lg:w-64 xl:w-96">
+						<div class="relative flex mt-1 lg:w-64 xl:w-96">
 							<input
 								type="text"
 								name="query"
 								id="empleados-search"
-								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 								placeholder="Buscar empleados"
 							/>
-							<label for="search_button">
-								<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M796-121 533-384q-30 26-69.959 40.5T378-329q-108.162 0-183.081-75Q120-479 120-585t75-181q75-75 181.5-75t181 75Q632-691 632-584.85 632-542 618-502q-14 40-42 75l264 262-44 44ZM377-389q81.25 0 138.125-57.5T572-585q0-81-56.875-138.5T377-781q-82.083 0-139.542 57.5Q180-666 180-585t57.458 138.5Q294.917-389 377-389Z"/></svg>
-							</label>
-							<input
+							<button
 								type="submit"
 								id="search_button"
 								class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 								set:text=""
-								/>
+								>
+								<svg xmlns="http://www.w3.org/2000/svg"class="w-6 h-6"
+								fill="currentColor" 
+								viewBox="0 -960 960 960" width="48"><path d="M796-121 533-384q-30 26-69.959 40.5T378-329q-108.162 0-183.081-75Q120-479 120-585t75-181q75-75 181.5-75t181 75Q632-691 632-584.85 632-542 618-502q-14 40-42 75l264 262-44 44ZM377-389q81.25 0 138.125-57.5T572-585q0-81-56.875-138.5T377-781q-82.083 0-139.542 57.5Q180-666 180-585t57.458 138.5Q294.917-389 377-389Z"/></svg>
+								</button>
 						</div>
 					</form>
 					<div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
-						
 						<a
 							href="#"
 							class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -265,49 +266,20 @@ const empleados = await getEmpleados(query, page);
 												</div>
 											</td>
 											<td class="p-4 space-x-2 whitespace-nowrap">
-												<button
-													type="button"
-													data-modal-toggle="edit-empleado-modal"
-													data-id-empleado=`${empleado.id}`
-													data-nombre-empleado = `${empleado.nombre} ${empleado.apellido_paterno} ${empleado.apellido_materno}`
+												<a
+													href=`./${empleado.id}`
 													class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 												>
 													<svg
 														class="w-4 h-4 mr-2"
 														fill="currentColor"
-														viewBox="0 0 20 20"
-														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 -960 960 960"xmlns="http://www.w3.org/2000/svg"
 													>
-														<>
-															<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-															<path
-																fill-rule="evenodd"
-																d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-																clip-rule="evenodd"
-															/>
-														</>
+													<path d="M480.118-330Q551-330 600.5-379.618q49.5-49.617 49.5-120.5Q650-571 600.382-620.5q-49.617-49.5-120.5-49.5Q409-670 359.5-620.382q-49.5 49.617-49.5 120.5Q310-429 359.618-379.5q49.617 49.5 120.5 49.5Zm-.353-58Q433-388 400.5-420.735q-32.5-32.736-32.5-79.5Q368-547 400.735-579.5q32.736-32.5 79.5-32.5Q527-612 559.5-579.265q32.5 32.736 32.5 79.5Q592-453 559.265-420.5q-32.736 32.5-79.5 32.5ZM480-200q-146 0-264-83T40-500q58-134 176-217t264-83q146 0 264 83t176 217q-58 134-176 217t-264 83Zm0-300Zm-.169 240Q601-260 702.5-325.5 804-391 857-500q-53-109-154.331-174.5-101.332-65.5-222.5-65.5Q359-740 257.5-674.5 156-609 102-500q54 109 155.331 174.5 101.332 65.5 222.5 65.5Z"/>
+														
 													</svg>
-													Editar empleado
-												</button>
-												<button
-													type="button"
-													data-modal-toggle="delete-empleado-modal"
-													class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-												>
-													<svg
-														class="w-4 h-4 mr-2"
-														fill="currentColor"
-														viewBox="0 0 20 20"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<path
-															fill-rule="evenodd"
-															d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-															clip-rule="evenodd"
-														/>
-													</svg>
-													Borrar empleado
-												</button>
+													Ver detalles
+												</a>
 											</td>
 										</tr>
 									</div>
