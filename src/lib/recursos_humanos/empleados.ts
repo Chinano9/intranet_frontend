@@ -34,25 +34,25 @@ const postEmpleado = async(body:Empleado) => {
 	return data;
 }
 
-const deleteEmpleado = async(num_empleado:number,body:Empleado) => {
+const deleteEmpleado = async(num_empleado:number) => {
 	console.log('deleteEmpleado');
 
 	const endpoint = `${url}empleados/${num_empleado}`;
 
 	const request:RequestInit = {
 		method: 'DELETE',
-		body:JSON.stringify(body)
 	};
 
 	const data = await fetchData(endpoint, request);
 	return data;
 }
 
-const patchEmpleado = async(num_empleado:number,body:Empleado) => {
+const patchEmpleado = async(num_empleado:number|string,body:Empleado) => {
 	console.log('patchEmpleado');
 
 	const endpoint = `${url}empleados/${num_empleado}`;
 
+	console.log(body)
 	const request:RequestInit = {
 		method: 'PATCH',
 		body:JSON.stringify(body)
@@ -62,7 +62,7 @@ const patchEmpleado = async(num_empleado:number,body:Empleado) => {
 	return data;
 }
 
-const getEmpleado =async (num_empleado:number) => {
+const getEmpleado = async (num_empleado:number) => {
 	console.log('getEmpleado');
 
 	const endpoint = `${url}empleados/${num_empleado}`;
