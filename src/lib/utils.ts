@@ -7,6 +7,7 @@ export const url = `${API_URL}${ENDPOINT}`;
 export async function fetchData(endpoint: string, request?: RequestInit) {
 	try {
 		const response = await fetch(endpoint, request);
+		console.log(response);
 		const data = await response.json();
 		return data;
 	} catch (error) {

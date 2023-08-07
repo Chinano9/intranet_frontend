@@ -55,6 +55,9 @@ const patchEmpleado = async(num_empleado:number|string,body:Empleado) => {
 	console.log(body)
 	const request:RequestInit = {
 		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json; charset=UTF-8',
+		},
 		body:JSON.stringify(body)
 	};
 

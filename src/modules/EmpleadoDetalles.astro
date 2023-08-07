@@ -1,7 +1,6 @@
 ---
 /* eslint max-lines: 'off' */
 import PictureUploader from '../components/PictureUploader.astro';
-import ToggleSwitch from '../components/ToggleSwitch.astro';
 import { getEmpleado } from '../lib/recursos_humanos';
 
 const { id_empleado } = Astro.props;
@@ -186,7 +185,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			<h3 class="mb-4 text-xl font-semibold dark:text-white">
 				Informacion general
 			</h3>
-			<form action=`../api/empleado/${empleado.id}` method="POST">
+			<form action=`../api/empleado/${id_empleado}` method="POST" >
 				<div class="grid grid-cols-6 gap-6">
 					<div class="col-span-6 sm:col-span-3">
 						<label
@@ -459,80 +458,12 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 					>
 				</div>
 			</form>
-			<form action=`../api/empleado/${id_empleado}` method="POST">
+			<form action=`../api/empleado/${id_empleado}` method="GET">
 				<button
 							class="inline-flex ml-6 items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
 							type="submit">Borrar empleado</button
 						>
 			</form>
-		</div>
-	</div>
-</div>
-<div class="grid grid-cols-1 px-4 xl:grid-cols-2 xl:gap-4">
-	<div
-		class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 xl:mb-0"
-	>
-		<div class="flow-root">
-			<h3 class="text-xl font-semibold dark:text-white">Email Notifications</h3>
-			<p class="text-sm font-normal text-gray-500 dark:text-gray-400">
-				You can set up Themesberg to get email notifications
-			</p>
-			<div class="divide-y divide-gray-200 dark:divide-gray-700">
-				<!-- Item 1 -->
-				<div class="flex items-center justify-between py-4">
-					<div class="flex flex-col flex-grow">
-						<div class="text-lg font-semibold text-gray-900 dark:text-white">
-							Rating reminders
-						</div>
-						<div class="text-base font-normal text-gray-500 dark:text-gray-400">
-							Send an email reminding me to rate an item a week after purchase
-						</div>
-					</div>
-					<ToggleSwitch id="rating-reminders" />
-				</div>
-				<!-- Item 2 -->
-				<div class="flex items-center justify-between py-4">
-					<div class="flex flex-col flex-grow">
-						<div class="text-lg font-semibold text-gray-900 dark:text-white">
-							Item update notifications
-						</div>
-						<div class="text-base font-normal text-gray-500 dark:text-gray-400">
-							Send user and product notifications for you
-						</div>
-					</div>
-					<ToggleSwitch id="item-update" />
-				</div>
-				<!-- Item 3 -->
-				<div class="flex items-center justify-between py-4">
-					<div class="flex flex-col flex-grow">
-						<div class="text-lg font-semibold text-gray-900 dark:text-white">
-							Item comment notifications
-						</div>
-						<div class="text-base font-normal text-gray-500 dark:text-gray-400">
-							Send me an email when someone comments on one of my items
-						</div>
-					</div>
-					<ToggleSwitch id="item-comment" />
-				</div>
-				<!-- Item 4 -->
-				<div class="flex items-center justify-between pt-4">
-					<div class="flex flex-col flex-grow">
-						<div class="text-lg font-semibold text-gray-900 dark:text-white">
-							Buyer review notifications
-						</div>
-						<div class="text-base font-normal text-gray-500 dark:text-gray-400">
-							Send me an email when someone leaves a review with their rating
-						</div>
-					</div>
-					<ToggleSwitch id="buyer-rev" />
-				</div>
-			</div>
-			<div class="mt-6">
-				<button
-					class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-					>Save all</button
-				>
-			</div>
 		</div>
 	</div>
 </div>
