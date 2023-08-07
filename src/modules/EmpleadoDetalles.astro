@@ -184,11 +184,10 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800"
 		>
 			<h3 class="mb-4 text-xl font-semibold dark:text-white">
-				General information
+				Informacion general
 			</h3>
-			<form action=`../api/empleado/${empleado.id}` method="POST" enctype="multipart/form-data">
+			<form action=`../api/empleado/${empleado.id}` method="POST">
 				<div class="grid grid-cols-6 gap-6">
-					<input type="hidden" name="id" value={empleado.id}>
 					<div class="col-span-6 sm:col-span-3">
 						<label
 							for="nombre"
@@ -460,7 +459,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 					>
 				</div>
 			</form>
-			<form action=`../api/empleado/${id_empleado}` method="DELETE">
+			<form action=`../api/empleado/${id_empleado}` method="POST">
 				<button
 							class="inline-flex ml-6 items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
 							type="submit">Borrar empleado</button
