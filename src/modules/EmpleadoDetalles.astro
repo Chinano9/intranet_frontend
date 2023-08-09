@@ -47,7 +47,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								clip-rule="evenodd"></path></svg
 						>
 						<a
-							href="#"
+							href="/recursos_humanos/empleados"
 							class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white"
 							>Empleados</a
 						>
@@ -85,7 +85,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			<div
 				class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4"
 			>
-				<PictureUploader title="Profile picture" />
+				<PictureUploader title="Foto del empleado" foto={empleado.foto}/>
 			</div>
 		</div>
 

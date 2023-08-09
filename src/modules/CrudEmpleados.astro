@@ -26,7 +26,7 @@ const empleados = queryset['results']
 					>
 						<li class="inline-flex items-center">
 							<a
-								href="#"
+								href="/"
 								class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white"
 							>
 								<svg
@@ -56,7 +56,7 @@ const empleados = queryset['results']
 								<a
 									href="#"
 									class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white"
-									>empleados</a
+									>Empleados</a
 								>
 							</div>
 						</li>
@@ -234,6 +234,7 @@ const empleados = queryset['results']
 						<tbody
 							class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
 						>
+						<!-- TODO: Arreglar redirecciones despues de hacer delete al empleado -->
 							{
 								empleados.map((empleado:Empleado) => (
 									<div>
@@ -245,7 +246,7 @@ const empleados = queryset['results']
 													alt={`Foto`}
 												/>
 												<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-													<a href={`../empleado/${empleado.id}`} class="text-base font-semibold text-gray-900 dark:text-white">
+													<a href={`/recursos_humanos/empleado/${empleado.id}`} class="text-base font-semibold text-gray-900 dark:text-white">
 														{empleado.nombre} {empleado.apellido_paterno} {empleado.apellido_materno}
 													</a>
 													<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -269,7 +270,7 @@ const empleados = queryset['results']
 											</td>
 											<td class="p-4 space-x-2 whitespace-nowrap">
 												<a
-													href={`../empleado/${empleado.id}`} 
+													href={`/recursos_humanos/empleado/${empleado.id}`} 
 													class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 												>
 													<svg

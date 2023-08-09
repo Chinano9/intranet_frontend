@@ -52,7 +52,7 @@ const patchEmpleado = async(num_empleado:number|string,body:Empleado) => {
 
 	const endpoint = `${url}empleados/${num_empleado}`;
 
-	console.log(body)
+	console.table(body)
 	const request:RequestInit = {
 		method: 'PATCH',
 		headers: {

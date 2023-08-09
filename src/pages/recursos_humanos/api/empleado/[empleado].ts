@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
 import {
-	getEmpleado,
 	patchEmpleado,
 	deleteEmpleado,
 } from '../../../../lib/recursos_humanos';
@@ -13,7 +12,7 @@ export const get: APIRoute = async ({ params, request, redirect }) => {
 	const { empleado } = params;
 	const body = await deleteEmpleado(Number.parseInt(empleado ? empleado : ''));
 
-	return redirect('../../empleados/', 308)
+	return redirect('/recursos_humanos/empleados/', 308)
 };
 
 // export const del: APIRoute = async ({ params, request, redirect }) => {
@@ -22,6 +21,7 @@ export const get: APIRoute = async ({ params, request, redirect }) => {
 // 	return redirect('../empleados', 301)
 // };
 
+// Este endpoint es usado como un metodo PATCH, si deseas hacer un post, ya existe un
 export const post: APIRoute = async ({ params, request, redirect }) => {
 	const json: any = {};
 	const { empleado } = params;
@@ -38,12 +38,10 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 
 	// console.count("patch")
 
-	console.log(`id de usuario: ${json.id}`);
-	console.log(`param empleado ${empleado}`)
 
 	const body = await patchEmpleado(
 		Number.parseInt(empleado),
 		json,
 	);
-	return redirect(`../empleado/${json.id}`, 308);
+	return redirect(`/recursos_humanos/empleado/${empleado}`, 308);
 };
