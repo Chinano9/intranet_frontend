@@ -15,13 +15,8 @@ export const get: APIRoute = async ({ params, request, redirect }) => {
 	return redirect('/recursos_humanos/empleados/', 308)
 };
 
-// export const del: APIRoute = async ({ params, request, redirect }) => {
-// 	const {empleado} = params;
-// 	await deleteEmpleado(Number.parseInt(empleado));
-// 	return redirect('../empleados', 301)
-// };
 
-// Este endpoint es usado como un metodo PATCH, si deseas hacer un post, ya existe un
+// Este endpoint es usado como un metodo PATCH, si deseas hacer un post, usa la funcion postEmpleado, ubicada en ~/src/app/lib/recursos_humanos.
 export const post: APIRoute = async ({ params, request, redirect }) => {
 	const json: any = {};
 	const { empleado } = params;
@@ -33,15 +28,19 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 	if (!json['foto']) {
 		delete json['foto'];
 	}
-
-	json['sueldo_texto'] = NumeroALetras(json['sueldo_dia']);
+	if (json['sueldo_dia']){
+		json['sueldo_texto'] = NumeroALetras(json['sueldo_dia']);
+	}
 
 	// console.count("patch")
 
-
-	const body = await patchEmpleado(
-		Number.parseInt(empleado),
-		json,
-	);
+	try {
+		const body = await patchEmpleado(
+			Number.parseInt(empleado),
+			json,
+		);
+	} catch (error) {
+		return redirect('/500', 301)
+	}
 	return redirect(`/recursos_humanos/empleado/${empleado}`, 308);
 };

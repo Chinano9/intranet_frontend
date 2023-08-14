@@ -1,6 +1,7 @@
 ---
 /* eslint max-lines: 'off' */
 import PictureUploader from '../components/PictureUploader.astro';
+import FormEmpleado from './FormEmpleado.astro';
 import { getEmpleado } from '../lib/recursos_humanos';
 
 const { id_empleado } = Astro.props;
@@ -85,7 +86,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			<div
 				class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4"
 			>
-				<PictureUploader title="Foto del empleado" foto={empleado.foto}/>
+				<PictureUploader title="Foto del empleado" foto_url={empleado.foto_url} id_empleado={id_empleado}/>
 			</div>
 		</div>
 
@@ -98,18 +99,42 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 					<li class="py-4">
 						<div class="flex items-center space-x-4">
 							<div class="flex-shrink-0">
+								<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+									<path fill="currentColor" d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-3 15H4.828a1 1 0 0 1 0-2h6.238a1 1 0 0 1 0 2Zm0-4H4.828a1 1 0 0 1 0-2h6.238a1 1 0 1 1 0 2Z"/>
+									<path fill="currentColor" d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+								</svg>
+							</div>
+							<div class="flex-1 min-w-0">
+								<span
+									class="block text-base font-semibold text-gray-900 truncate dark:text-white"
+								>
+									Generar kardex
+								</span>
+							</div>
+							<div class="inline-flex items-center">
+								<a
+									href=""
+									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+									>Generar</a
+								>
+							</div>
+						</div>
+					</li>
+					<li class="pt-4 pb-6">
+						<div class="flex items-center space-x-4">
+							<div class="flex-shrink-0">
 								<svg
 									class="w-5 h-5 dark:text-white"
 									aria-hidden="true"
 									focusable="false"
 									data-prefix="fab"
-									data-icon="github"
+									data-icon="dribbble"
 									role="img"
 									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 -960 960 960"
+									viewBox="0 0 512 512"
 									><path
 										fill="currentColor"
-										d="M319-250h322v-60H319v60Zm0-170h322v-60H319v60ZM220-80q-24 0-42-18t-18-42v-680q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm331-554v-186H220v680h520v-494H551ZM220-820v186-186 680-680Z"
+										d="M256 8C119.252 8 8 119.252 8 256s111.252 248 248 248 248-111.252 248-248S392.748 8 256 8zm163.97 114.366c29.503 36.046 47.369 81.957 47.835 131.955-6.984-1.477-77.018-15.682-147.502-6.818-5.752-14.041-11.181-26.393-18.617-41.614 78.321-31.977 113.818-77.482 118.284-83.523zM396.421 97.87c-3.81 5.427-35.697 48.286-111.021 76.519-34.712-63.776-73.185-116.168-79.04-124.008 67.176-16.193 137.966 1.27 190.061 47.489zm-230.48-33.25c5.585 7.659 43.438 60.116 78.537 122.509-99.087 26.313-186.36 25.934-195.834 25.809C62.38 147.205 106.678 92.573 165.941 64.62zM44.17 256.323c0-2.166.043-4.322.108-6.473 9.268.19 111.92 1.513 217.706-30.146 6.064 11.868 11.857 23.915 17.174 35.949-76.599 21.575-146.194 83.527-180.531 142.306C64.794 360.405 44.17 310.73 44.17 256.323zm81.807 167.113c22.127-45.233 82.178-103.622 167.579-132.756 29.74 77.283 42.039 142.053 45.189 160.638-68.112 29.013-150.015 21.053-212.768-27.882zm248.38 8.489c-2.171-12.886-13.446-74.897-41.152-151.033 66.38-10.626 124.7 6.768 131.947 9.055-9.442 58.941-43.273 109.844-90.795 141.978z"
 									></path></svg
 								>
 							</div>
@@ -117,7 +142,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								<span
 									class="block text-base font-semibold text-gray-900 truncate dark:text-white"
 								>
-									Generar kardex
+									Gafete
 								</span>
 							</div>
 							<div class="inline-flex items-center">
@@ -151,19 +176,48 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								<span
 									class="block text-base font-semibold text-gray-900 truncate dark:text-white"
 								>
-									Dribbble account
-								</span>
-								<span
-									class="block text-sm font-normal text-gray-500 truncate dark:text-gray-400"
-								>
-									Not connected
+									Contrato determinado
 								</span>
 							</div>
 							<div class="inline-flex items-center">
 								<a
 									href="#"
 									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-									>Connect</a
+									>Generar</a
+								>
+							</div>
+						</div>
+					</li>
+					<li class="pt-4 pb-6">
+						<div class="flex items-center space-x-4">
+							<div class="flex-shrink-0">
+								<svg
+									class="w-5 h-5 dark:text-white"
+									aria-hidden="true"
+									focusable="false"
+									data-prefix="fab"
+									data-icon="dribbble"
+									role="img"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 512 512"
+									><path
+										fill="currentColor"
+										d="M256 8C119.252 8 8 119.252 8 256s111.252 248 248 248 248-111.252 248-248S392.748 8 256 8zm163.97 114.366c29.503 36.046 47.369 81.957 47.835 131.955-6.984-1.477-77.018-15.682-147.502-6.818-5.752-14.041-11.181-26.393-18.617-41.614 78.321-31.977 113.818-77.482 118.284-83.523zM396.421 97.87c-3.81 5.427-35.697 48.286-111.021 76.519-34.712-63.776-73.185-116.168-79.04-124.008 67.176-16.193 137.966 1.27 190.061 47.489zm-230.48-33.25c5.585 7.659 43.438 60.116 78.537 122.509-99.087 26.313-186.36 25.934-195.834 25.809C62.38 147.205 106.678 92.573 165.941 64.62zM44.17 256.323c0-2.166.043-4.322.108-6.473 9.268.19 111.92 1.513 217.706-30.146 6.064 11.868 11.857 23.915 17.174 35.949-76.599 21.575-146.194 83.527-180.531 142.306C64.794 360.405 44.17 310.73 44.17 256.323zm81.807 167.113c22.127-45.233 82.178-103.622 167.579-132.756 29.74 77.283 42.039 142.053 45.189 160.638-68.112 29.013-150.015 21.053-212.768-27.882zm248.38 8.489c-2.171-12.886-13.446-74.897-41.152-151.033 66.38-10.626 124.7 6.768 131.947 9.055-9.442 58.941-43.273 109.844-90.795 141.978z"
+									></path></svg
+								>
+							</div>
+							<div class="flex-1 min-w-0">
+								<span
+									class="block text-base font-semibold text-gray-900 truncate dark:text-white"
+								>
+									Contrato indeterminado
+								</span>
+							</div>
+							<div class="inline-flex items-center">
+								<a
+									href="#"
+									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+									>Generar</a
 								>
 							</div>
 						</div>
@@ -172,7 +226,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 				<div>
 					<button
 						class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-						>Save all</button
+						>Exportar Informacion (csv)</button
 					>
 				</div>
 			</div>
@@ -186,268 +240,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 				Informacion general
 			</h3>
 			<form action=`../api/empleado/${id_empleado}` method="POST" >
-				<div class="grid grid-cols-6 gap-6">
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="nombre"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Nombre
-						</label>
-						<input
-							type="text"
-							name="nombre"
-							id="nombre"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							placeholder="Nombre"
-							value={empleado.nombre}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="apellido_paterno"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Apellido paterno
-						</label>
-						<input
-							type="text"
-							name="apellido_paterno"
-							id="apellido_paterno"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							placeholder="Apellido paterno"
-							value={empleado.apellido_paterno}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="apellido_materno"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Apellido materno
-						</label>
-						<input
-							type="text"
-							name="apellido_materno"
-							id="apellido_materno"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							placeholder="Apellido materno"
-							value={empleado.apellido_materno}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="email"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Email
-						</label>
-						<input
-							type="email"
-							name="email"
-							id="email"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							placeholder="example@company.com"
-							value={empleado.email}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="fecha_nacimiento"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Fecha de Nacimiento
-						</label>
-						<input
-							type="date"
-							name="fecha_nacimiento"
-							id="fecha_nacimiento"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.fecha_nacimiento}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="fecha_contratacion"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Fecha de Contratación
-						</label>
-						<input
-							type="date"
-							name="fecha_contratacion"
-							id="fecha_contratacion"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.fecha_contratacion}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="ciudad"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Ciudad
-						</label>
-						<input
-							type="text"
-							name="ciudad"
-							id="ciudad"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.ciudad}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="estado"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Estado
-						</label>
-						<input
-							type="text"
-							name="estado"
-							id="estado"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.estado}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="codigo_postal"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Código Postal
-						</label>
-						<input
-							type="text"
-							name="codigo_postal"
-							id="codigo_postal"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.codigo_postal}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="puesto"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Puesto
-						</label>
-						<input
-							type="text"
-							name="puesto"
-							id="puesto"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.puesto}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="tel_casa"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Teléfono de Casa
-						</label>
-						<input
-							type="tel"
-							name="tel_casa"
-							id="tel_casa"
-							value={empleado.tel_casa}
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="tel_cel"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Teléfono Celular
-						</label>
-						<input
-							type="tel"
-							name="tel_cel"
-							id="tel_cel"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.tel_cel}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="curp"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							CURP
-						</label>
-						<input
-							type="text"
-							name="curp"
-							id="curp"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.curp}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="rfc"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							RFC
-						</label>
-						<input
-							type="text"
-							name="rfc"
-							id="rfc"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.rfc}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="seguro_social"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							NSS
-						</label>
-						<input
-							type="text"
-							name="seguro_social"
-							id="seguro_social"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.seguro_social}
-							required
-						/>
-					</div>
-					<div class="col-span-6 sm:col-span-3">
-						<label
-							for="sueldo_dia"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-						>
-							Sueldo
-						</label>
-						<input
-							type="tel"
-							name="sueldo_dia"
-							id="sueldo_dia"
-							class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-							value={empleado.sueldo_dia}
-							required
-						/>
-					</div>
-				</div>
-
+				<FormEmpleado id_empleado={id_empleado}/>
 				<!-- Modal footer -->
 				<div
 					class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700"

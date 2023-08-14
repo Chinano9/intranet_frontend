@@ -1,0 +1,360 @@
+---
+import { getEmpleado } from '../lib/recursos_humanos';
+
+const { id_empleado } = Astro.props;
+
+const empleado = await getEmpleado(Number.parseInt(id_empleado));
+---
+<!-- Asterisco para los necesarios -->
+<div class="grid grid-cols-6 gap-6">
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="nombre"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Nombre
+		</label>
+		<input
+			type="text"
+			name="nombre"
+			id="nombre"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Nombre"
+			value={empleado?.nombre}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="apellido_paterno"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Apellido paterno
+		</label>
+		<input
+			type="text"
+			name="apellido_paterno"
+			id="apellido_paterno"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Apellido paterno"
+			value={empleado?.apellido_paterno}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="apellido_materno"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Apellido materno
+		</label>
+		<input
+			type="text"
+			name="apellido_materno"
+			id="apellido_materno"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Apellido materno"
+			value={empleado?.apellido_materno}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="email"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Email
+		</label>
+		<input
+			type="email"
+			name="email"
+			id="email"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="example@company.com"
+			value={empleado?.email}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="fecha_nacimiento"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Fecha de Nacimiento
+		</label>
+		<input
+			type="date"
+			name="fecha_nacimiento"
+			id="fecha_nacimiento"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.fecha_nacimiento}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="fecha_contratacion"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Fecha de Contratación
+		</label>
+		<input
+			type="date"
+			name="fecha_contratacion"
+			id="fecha_contratacion"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.fecha_contratacion}
+			required
+		/>
+	</div>
+	<!-- Ciudad de Residencia -->
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="ciudad_residencia"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Ciudad de Residencia
+		</label>
+		<input
+			type="text"
+			name="ciudad_residencia"
+			id="ciudad_residencia"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Ciudad de Residencia"
+			value={empleado?.ciudad_residencia}
+			required
+		/>
+	</div>
+	<!-- Estado de Residencia -->
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="estado_residencia"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Estado de Residencia
+		</label>
+		<input
+			type="text"
+			name="estado_residencia"
+			id="estado_residencia"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Estado de Residencia"
+			value={empleado?.estado_residencia}
+			required
+		/>
+	</div>
+
+	<!-- Número de Casa -->
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="num_casa"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Número de Casa
+		</label>
+		<input
+			type="text"
+			name="num_casa"
+			id="num_casa"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Número de Casa"
+			value={empleado?.num_casa}
+			required
+		/>
+	</div>
+
+	<!-- Jefe Directo -->
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="jefe_directo"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Jefe Directo
+		</label>
+		<input
+			type="text"
+			name="jefe_directo"
+			id="jefe_directo"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Jefe Directo"
+			value={empleado?.jefe_directo}
+		/>
+	</div>
+
+	<!-- Estado Civil -->
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="estado_civil"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Estado Civil
+		</label>
+		<input
+			type="text"
+			name="estado_civil"
+			id="estado_civil"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Estado Civil"
+			value={empleado?.estado_civil}
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="codigo_postal"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Código Postal
+		</label>
+		<input
+			type="text"
+			name="codigo_postal"
+			id="codigo_postal"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.codigo_postal}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="ciudad_origen"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Ciudad de origen
+		</label>
+		<input
+			type="text"
+			name="ciudad_origen"
+			id="ciudad_origen"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.ciudad_origen}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="estado_origen"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Estado de origen
+		</label>
+		<input
+			type="text"
+			name="estado_origen"
+			id="estado_origen"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.estado_origen}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="puesto"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Puesto
+		</label>
+		<input
+			type="text"
+			name="puesto"
+			id="puesto"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.puesto}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="tel_casa"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Teléfono de Casa
+		</label>
+		<input
+			type="tel"
+			name="tel_casa"
+			id="tel_casa"
+			value={empleado?.tel_casa}
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="tel_cel"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Teléfono Celular
+		</label>
+		<input
+			type="tel"
+			name="tel_cel"
+			id="tel_cel"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.tel_cel}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="curp"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			CURP
+		</label>
+		<input
+			type="text"
+			name="curp"
+			id="curp"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.curp}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="rfc"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			RFC
+		</label>
+		<input
+			type="text"
+			name="rfc"
+			id="rfc"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.rfc}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="seguro_social"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			NSS
+		</label>
+		<input
+			type="text"
+			name="seguro_social"
+			id="seguro_social"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.seguro_social}
+			required
+		/>
+	</div>
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="sueldo_dia"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Sueldo
+		</label>
+		<input
+			type="tel"
+			name="sueldo_dia"
+			id="sueldo_dia"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			value={empleado?.sueldo_dia}
+			required
+		/>
+	</div>
+</div>

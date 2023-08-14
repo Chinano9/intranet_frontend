@@ -36,6 +36,7 @@
 		"start": "astro dev"
 	},
 	"dependencies": {
+		"@astrojs/node": "^5.3.2",
 		"@astrojs/sitemap": "^1.1.0",
 		"@astrojs/tailwind": "^3.0.1",
 		"@auth/core": "^0.5.1",

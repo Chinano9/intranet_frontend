@@ -2,6 +2,7 @@
 /* eslint max-lines: 'off' */
 
 import NavPagination from '../components/NavPagination.astro';
+import FormEmpleado from './FormEmpleado.astro';
 import { getEmpleados } from '../lib/recursos_humanos/index.js';
 import type { Empleado } from '../types/recursos_humanos';
 const query = Astro.url.searchParams.get('query')!;
@@ -242,7 +243,7 @@ const empleados = queryset['results']
 											<td class="flex justify-start items-center p-4 mr-12 space-x-6 whitespace-nowrap">
 												<img
 													class="w-10 h-10 rounded-full text-xs"
-													src={empleado.foto}
+													src={empleado.foto_url}
 													alt={`Foto`}
 												/>
 												<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -261,7 +262,7 @@ const empleados = queryset['results']
 												{empleado.fecha_contratacion}
 											</td>
 											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-												{empleado.ciudad} {empleado.estado}. {empleado.codigo_postal}
+												{empleado.ciudad_residencia} {empleado.estado_residencia}. {empleado.codigo_postal}
 											</td>
 											<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
 												<div class="flex items-center">
@@ -476,7 +477,8 @@ const empleados = queryset['results']
 
 	<!-- Add empleado Modal -->
 	<div
-		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 mt-1 h-modal sm:h-full"
+		class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4
+		max-height-1 md:inset-0 mt-1 h-modal sm:h-full"
 		id="add-empleado-modal"
 	>
 		<div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
@@ -507,268 +509,7 @@ const empleados = queryset['results']
 				<!-- Modal body -->
 				<div class="p-6 space-y-6">
 					<form action="./api/empleados" method="POST" >
-						<div class="grid grid-cols-6 gap-6">
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="nombre"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Nombre
-								</label>
-								<input
-									type="text"
-									name="nombre"
-									id="nombre"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Nombre"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="apellido_paterno"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Apellido paterno
-								</label>
-								<input
-									type="text"
-									name="apellido_paterno"
-									id="apellido_paterno"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Apellido paterno"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="apellido_materno"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Apellido materno
-								</label>
-								<input
-									type="text"
-									name="apellido_materno"
-									id="apellido_materno"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="Apellido materno"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="email"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Email
-								</label>
-								<input
-									type="email"
-									name="email"
-									id="email"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									placeholder="example@company.com"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="fecha_nacimiento"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Fecha de Nacimiento
-								</label>
-								<input
-									type="date"
-									name="fecha_nacimiento"
-									id="fecha_nacimiento"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="fecha_contratacion"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Fecha de Contratación
-								</label>
-								<input
-									type="date"
-									name="fecha_contratacion"
-									id="fecha_contratacion"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="foto"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Foto
-								</label>
-								<input
-									type="file"
-									name="foto"
-									id="foto"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="ciudad"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Ciudad
-								</label>
-								<input
-									type="text"
-									name="ciudad"
-									id="ciudad"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="estado"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Estado
-								</label>
-								<input
-									type="text"
-									name="estado"
-									id="estado"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="codigo_postal"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Código Postal
-								</label>
-								<input
-									type="text"
-									name="codigo_postal"
-									id="codigo_postal"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="puesto"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Puesto
-								</label>
-								<input
-									type="text"
-									name="puesto"
-									id="puesto"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="tel_casa"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Teléfono de Casa
-								</label>
-								<input
-									type="tel"
-									name="tel_casa"
-									id="tel_casa"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="tel_cel"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Teléfono Celular
-								</label>
-								<input
-									type="tel"
-									name="tel_cel"
-									id="tel_cel"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="curp"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									CURP
-								</label>
-								<input
-									type="text"
-									name="curp"
-									id="curp"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="rfc"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									RFC
-								</label>
-								<input
-									type="text"
-									name="rfc"
-									id="rfc"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="seguro_social"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									NSS
-								</label>
-								<input
-									type="text"
-									name="seguro_social"
-									id="seguro_social"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<div class="col-span-6 sm:col-span-3">
-								<label
-									for="sueldo_dia"
-									class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								>
-									Sueldo/dia
-								</label>
-								<input
-									type="tel"
-									name="sueldo_dia"
-									id="sueldo_dia"
-									class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-									required
-								/>
-							</div>
-							<!--Planta, jefe directo, estado civil -->
-
-						</div>
-					
+						<FormEmpleado/>
 					<!-- Modal footer -->
 					<div
 						class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700"
