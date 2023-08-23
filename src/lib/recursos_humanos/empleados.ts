@@ -14,6 +14,7 @@ const getEmpleados = async(query?:string, page?:string) => {
 	};
 
 	const data = await fetchData(endpoint, request);
+	console.log(data);
 	return data;
 }
 
@@ -44,6 +45,7 @@ const deleteEmpleado = async(num_empleado:number) => {
 	};
 
 	const data = await fetchData(endpoint, request);
+	
 	return data;
 }
 
@@ -52,7 +54,7 @@ const patchEmpleado = async(num_empleado:number|string,body:Empleado) => {
 
 	const endpoint = `${url}empleados/${num_empleado}`;
 
-	console.table(body)
+	
 	const request:RequestInit = {
 		method: 'PATCH',
 		headers: {
@@ -62,6 +64,23 @@ const patchEmpleado = async(num_empleado:number|string,body:Empleado) => {
 	};
 
 	const data = await fetchData(endpoint, request);
+	return data;
+}
+
+const patchFotoEmpleado = async (num_empleado:number|string,body:FormData) => {
+	console.log('patchFotoEmpleado');
+	console.table(body);
+	const endpoint = `${url}empleados/${num_empleado}`;
+	const request:RequestInit = {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+		},
+		body
+	};
+
+	const data = await fetchData(endpoint, request);
+	console.log(data)
 	return data;
 }
 
@@ -82,6 +101,7 @@ export {
 	getEmpleados,
 	postEmpleado,
 	patchEmpleado,
+	patchFotoEmpleado,
 	deleteEmpleado,
 	getEmpleado
 }

@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import {
 	patchEmpleado,
 	deleteEmpleado,
+	patchFotoEmpleado,
 } from '../../../../lib/recursos_humanos';
 import { NumeroALetras } from '../../../../lib/numeros-a-letras';
 
@@ -17,6 +18,7 @@ export const get: APIRoute = async ({ params, request, redirect }) => {
 
 
 // Este endpoint es usado como un metodo PATCH, si deseas hacer un post, usa la funcion postEmpleado, ubicada en ~/src/app/lib/recursos_humanos.
+// o el endpoint en api/empleados
 export const post: APIRoute = async ({ params, request, redirect }) => {
 	const json: any = {};
 	const { empleado } = params;
@@ -25,9 +27,7 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 		json[key] = value;
 	});
 
-	if (!json['foto']) {
-		delete json['foto'];
-	}
+	delete json['foto'];
 	if (json['sueldo_dia']){
 		json['sueldo_texto'] = NumeroALetras(json['sueldo_dia']);
 	}
@@ -40,6 +40,7 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 			json,
 		);
 	} catch (error) {
+		console.error('Error al actualizar empleado: ', error);
 		return redirect('/500', 301)
 	}
 	return redirect(`/recursos_humanos/empleado/${empleado}`, 308);

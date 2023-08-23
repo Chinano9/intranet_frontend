@@ -112,11 +112,14 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<a
-									href=""
-									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-									>Generar</a
-								>
+								<form action=`../api/documentos/${id_empleado}` method="get">
+									<input type="hidden" name="documento" value="kardex">
+									<button
+										type="submit"
+										class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+										>Generar</button
+									>
+								</form>
 							</div>
 						</div>
 					</li>

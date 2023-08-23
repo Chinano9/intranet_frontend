@@ -1,18 +1,27 @@
 ---
 import { getEmpleado } from '../lib/recursos_humanos';
+import { fetchData, url } from '../lib/utils';
 
 const { id_empleado } = Astro.props;
 
 const empleado = await getEmpleado(Number.parseInt(id_empleado));
+const puestos = await fetchData(`${url}puestos`);
+
+function isSelected(id){
+	return empleado?.puesto == id
+}
 ---
 <!-- Asterisco para los necesarios -->
-<div class="grid grid-cols-6 gap-6">
+<p 
+class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+>Los campos con * son obligatorios</p>
+<div class="grid grid-cols-6 gap-6 max-h-[32rem] overflow-y-scroll">
 	<div class="col-span-6 sm:col-span-3">
 		<label
 			for="nombre"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Nombre
+			Nombre *
 		</label>
 		<input
 			type="text"
@@ -29,7 +38,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="apellido_paterno"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Apellido paterno
+			Apellido paterno *
 		</label>
 		<input
 			type="text"
@@ -46,7 +55,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="apellido_materno"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Apellido materno
+			Apellido materno *
 		</label>
 		<input
 			type="text"
@@ -63,7 +72,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="email"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Email
+			Email *
 		</label>
 		<input
 			type="email"
@@ -80,7 +89,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="fecha_nacimiento"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Fecha de Nacimiento
+			Fecha de Nacimiento *
 		</label>
 		<input
 			type="date"
@@ -96,7 +105,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="fecha_contratacion"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Fecha de Contratación
+			Fecha de Contratación *
 		</label>
 		<input
 			type="date"
@@ -113,7 +122,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="ciudad_residencia"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Ciudad de Residencia
+			Ciudad de Residencia *
 		</label>
 		<input
 			type="text"
@@ -131,7 +140,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="estado_residencia"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Estado de Residencia
+			Estado de Residencia *
 		</label>
 		<input
 			type="text"
@@ -150,7 +159,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="num_casa"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Número de Casa
+			Número de Casa *
 		</label>
 		<input
 			type="text"
@@ -159,6 +168,24 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Número de Casa"
 			value={empleado?.num_casa}
+			required
+		/>
+	</div>
+
+	<div class="col-span-6 sm:col-span-3">
+		<label
+			for="num_casa"
+			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+		>
+			Nombre de la calle *
+		</label>
+		<input
+			type="text"
+			name="calle"
+			id="calle"
+			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+			placeholder="Calle"
+			value={empleado?.calle}
 			required
 		/>
 	</div>
@@ -203,7 +230,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="codigo_postal"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Código Postal
+			Código Postal *
 		</label>
 		<input
 			type="text"
@@ -227,7 +254,6 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			id="ciudad_origen"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.ciudad_origen}
-			required
 		/>
 	</div>
 	<div class="col-span-6 sm:col-span-3">
@@ -243,7 +269,6 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			id="estado_origen"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.estado_origen}
-			required
 		/>
 	</div>
 	<div class="col-span-6 sm:col-span-3">
@@ -251,16 +276,20 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="puesto"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Puesto
+			Puesto *
 		</label>
-		<input
-			type="text"
-			name="puesto"
+		<select 
+			name="puesto" 
 			id="puesto"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-			value={empleado?.puesto}
 			required
-		/>
+			>
+			{puestos.map(puesto => (
+					<option value=`${puesto.id}` selected={isSelected(puesto.id)} >{puesto.nombre}</option>
+			))}
+
+		</select>
+
 	</div>
 	<div class="col-span-6 sm:col-span-3">
 		<label
@@ -282,7 +311,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="tel_cel"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Teléfono Celular
+			Teléfono Celular *
 		</label>
 		<input
 			type="tel"
@@ -298,7 +327,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="curp"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			CURP
+			CURP *
 		</label>
 		<input
 			type="text"
@@ -314,7 +343,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="rfc"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			RFC
+			RFC *
 		</label>
 		<input
 			type="text"
@@ -330,7 +359,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="seguro_social"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			NSS
+			NSS *
 		</label>
 		<input
 			type="text"
@@ -346,7 +375,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			for="sueldo_dia"
 			class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
-			Sueldo
+			Sueldo *
 		</label>
 		<input
 			type="tel"

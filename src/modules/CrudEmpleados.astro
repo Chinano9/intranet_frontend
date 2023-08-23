@@ -122,7 +122,7 @@ const empleados = queryset['results']
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
 								fill="currentColor"
-								viewBox="0 0 20 20">
+								viewBox="0 -960 960 960">
 								<path d="M440-160q-17 0-28.5-11.5T400-200v-240L161-745q-14-17-4-36t31-19h584q21 0 31 19t-4 36L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-276 240-304H240l240 304Zm0 0Z"/>
 							</svg
 							>
@@ -235,7 +235,6 @@ const empleados = queryset['results']
 						<tbody
 							class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
 						>
-						<!-- TODO: Arreglar redirecciones despues de hacer delete al empleado -->
 							{
 								empleados.map((empleado:Empleado) => (
 									<div>
@@ -266,7 +265,7 @@ const empleados = queryset['results']
 											</td>
 											<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
 												<div class="flex items-center">
-													{empleado.puesto}
+													{empleado.puesto.nombre}
 												</div>
 											</td>
 											<td class="p-4 space-x-2 whitespace-nowrap">
@@ -508,7 +507,7 @@ const empleados = queryset['results']
 				</div>
 				<!-- Modal body -->
 				<div class="p-6 space-y-6">
-					<form action="./api/empleados" method="POST" >
+					<form action="./api/empleados" class="" method="POST" >
 						<FormEmpleado/>
 					<!-- Modal footer -->
 					<div
