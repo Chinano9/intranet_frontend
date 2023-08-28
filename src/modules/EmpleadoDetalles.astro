@@ -3,6 +3,7 @@
 import PictureUploader from '../components/PictureUploader.astro';
 import FormEmpleado from './FormEmpleado.astro';
 import { getEmpleado } from '../lib/recursos_humanos';
+import Test from '../components/test.svelte';
 
 const { id_empleado } = Astro.props;
 
@@ -86,9 +87,15 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			<div
 				class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4"
 			>
-				<PictureUploader title="Foto del empleado" foto_url={empleado.foto_url} id_empleado={id_empleado}/>
+				<PictureUploader
+					title="Foto del empleado"
+					foto_url={empleado.foto_url}
+					id_empleado={id_empleado}
+				/>
 			</div>
 		</div>
+
+		<Test client:load id={id_empleado} documento='kardex'></Test>
 
 		<div
 			class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800"
@@ -99,9 +106,21 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 					<li class="py-4">
 						<div class="flex items-center space-x-4">
 							<div class="flex-shrink-0">
-								<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-									<path fill="currentColor" d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-3 15H4.828a1 1 0 0 1 0-2h6.238a1 1 0 0 1 0 2Zm0-4H4.828a1 1 0 0 1 0-2h6.238a1 1 0 1 1 0 2Z"/>
-									<path fill="currentColor" d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+								<svg
+									class="w-6 h-6 text-gray-800 dark:text-white"
+									aria-hidden="true"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="currentColor"
+									viewBox="0 0 16 20"
+								>
+									<path
+										fill="currentColor"
+										d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-3 15H4.828a1 1 0 0 1 0-2h6.238a1 1 0 0 1 0 2Zm0-4H4.828a1 1 0 0 1 0-2h6.238a1 1 0 1 1 0 2Z"
+									></path>
+									<path
+										fill="currentColor"
+										d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"
+									></path>
 								</svg>
 							</div>
 							<div class="flex-1 min-w-0">
@@ -112,14 +131,15 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<form action=`../api/documentos/${id_empleado}` method="get">
-									<input type="hidden" name="documento" value="kardex">
-									<button
-										type="submit"
+								<document-button data-id={id_empleado}>
+									<!-- <form action=`../api/documentos/${id_empleado}` method="post">
+									<input type="hidden" name="documento" value="kardex"> -->
+									<a
 										class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-										>Generar</button
+										>Generar</a
 									>
-								</form>
+								</document-button>
+								<!-- </form> -->
 							</div>
 						</div>
 					</li>
@@ -242,8 +262,8 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			<h3 class="mb-4 text-xl font-semibold dark:text-white">
 				Informacion general
 			</h3>
-			<form action=`../api/empleado/${id_empleado}` method="POST" >
-				<FormEmpleado id_empleado={id_empleado}/>
+			<form action=`../api/empleado/${id_empleado}` method="POST">
+				<FormEmpleado id_empleado={id_empleado} />
 				<!-- Modal footer -->
 				<div
 					class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700"
@@ -256,10 +276,49 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			</form>
 			<form action=`../api/empleado/${id_empleado}` method="GET">
 				<button
-							class="inline-flex ml-6 items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-							type="submit">Borrar empleado</button
-						>
+					class="inline-flex ml-6 items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
+					type="submit">Borrar empleado</button
+				>
 			</form>
 		</div>
 	</div>
 </div>
+
+<!-- <script type="module">
+	
+	class DocumentButton extends HTMLElement {
+		constructor() {
+			console.log('ola');
+			super();
+			const button = this.querySelector('a');
+			button?.addEventListener('click', async () => {
+				console.log('getKardex');
+				const kardex = DOCS_ROUTE + `kardex/${this.dataset.id ? this.dataset.id : '0'}`;
+				try {
+					const response = await fetch(kardex);
+
+					if (response.ok) {
+						// La solicitud fue exitosa
+						const blob = await response.blob();
+						const filename = response.headers
+							.get('content-disposition')?
+							.split('filename=')[1]:0;
+						// Crear un enlace para descargar el archivo
+						button.href= URL.createObjectURL(blob);
+
+						console.log('SI SE DA CLICK OMG!');
+						button.download;
+						return 'exito';
+					} else {
+						// La solicitud falló
+						return 'Error al obtener el kardex';
+					}
+				} catch (error) {
+					console.error('Error:', error);
+					return 'Error en la solicitud';
+				}
+			});
+		}
+	}
+	customElements.define('document-button', DocumentButton);
+</script> -->

@@ -5,6 +5,7 @@ import auth from 'auth-astro';
 import { loadEnv } from 'vite';
 import Google from '@auth/core/providers/google';
 import node from "@astrojs/node";
+import svelte from "@astrojs/svelte";
 const DEV_PORT = 2121;
 const env = loadEnv('production', process.cwd(), '');
 
@@ -31,7 +32,7 @@ export default defineConfig({
   // 		}),
   // 	],
   // }),
-  ],
+  , svelte()],
   adapter: node({
     mode: "standalone"
   })

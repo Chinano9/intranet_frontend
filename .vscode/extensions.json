@@ -5,7 +5,8 @@
 		"austenc.tailwind-docs",
 		"esbenp.prettier-vscode",
 		"editorconfig.editorconfig",
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"svelte.svelte-vscode"
 	],
 	"unwantedRecommendations": []
 }
