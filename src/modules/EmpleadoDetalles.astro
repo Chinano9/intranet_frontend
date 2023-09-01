@@ -1,9 +1,10 @@
 ---
 /* eslint max-lines: 'off' */
-import PictureUploader from '../components/PictureUploader.astro';
+import PictureUploader from '../components/PictureUploader.svelte';
 import FormEmpleado from './FormEmpleado.astro';
 import { getEmpleado } from '../lib/recursos_humanos';
-import Test from '../components/test.svelte';
+import Test from '../components/GetDocuments.svelte';
+import GetDocuments from '../components/GetDocuments.svelte';
 
 const { id_empleado } = Astro.props;
 
@@ -88,6 +89,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 				class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4"
 			>
 				<PictureUploader
+					client:only
 					title="Foto del empleado"
 					foto_url={empleado.foto_url}
 					id_empleado={id_empleado}
@@ -95,7 +97,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 			</div>
 		</div>
 
-		<Test client:load id={id_empleado} documento='kardex'></Test>
+		
 
 		<div
 			class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800"
@@ -131,14 +133,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<document-button data-id={id_empleado}>
-									<!-- <form action=`../api/documentos/${id_empleado}` method="post">
-									<input type="hidden" name="documento" value="kardex"> -->
-									<a
-										class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-										>Generar</a
-									>
-								</document-button>
+								<Test client:load id={id_empleado} documento='kardex'>Generar</Test>
 								<!-- </form> -->
 							</div>
 						</div>
@@ -169,11 +164,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<a
-									href="#"
-									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-									>Generar</a
-								>
+								<Test client:load id={id_empleado} documento='gafete'>Generar</Test>
 							</div>
 						</div>
 					</li>
@@ -203,11 +194,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<a
-									href="#"
-									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-									>Generar</a
-								>
+								<GetDocuments client:load id={id_empleado} documento='contrato_determinado'>Generar</GetDocuments>
 							</div>
 						</div>
 					</li>
@@ -237,20 +224,13 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<a
-									href="#"
-									class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-									>Generar</a
-								>
+								<GetDocuments client:load id={id_empleado} documento='contrato_indeterminado'>Generar</GetDocuments>
 							</div>
 						</div>
 					</li>
 				</ul>
 				<div>
-					<button
-						class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-						>Exportar Informacion (csv)</button
-					>
+					<GetDocuments client:load id={id_empleado} documento='exportar_csv'>Exportar datos a CSV</GetDocuments>
 				</div>
 			</div>
 		</div>

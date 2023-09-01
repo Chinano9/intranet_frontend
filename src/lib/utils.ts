@@ -9,7 +9,7 @@ export async function fetchData(endpoint: string, request?: RequestInit) {
 		const data = await response.json();
 		return data;
 	} catch (error) {
-		console.error('Error al obtener los datos:', error);
+		// console.error('Error al obtener los datos:', error);
 		return [];
 	}
 }

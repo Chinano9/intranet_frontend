@@ -2,8 +2,8 @@ import { url } from '../utils';
 
 const DOCS_ROUTE = url + 'empleados/documentos/';
 
-export const getDocumentoEmpleado = async (documento: string,num_empleado: string) => {
-	const doc = DOCS_ROUTE + `${documento}/${num_empleado}`;
+export const getDocumentoEmpleado = async (documento: string,num_empleado?: string) => {
+	const doc = DOCS_ROUTE + `${documento}/${num_empleado?num_empleado:''}`;
 	try {
 		const response = await fetch(doc, {
 		});

@@ -4,7 +4,7 @@ import { fetchData, url } from '../lib/utils';
 
 const { id_empleado } = Astro.props;
 
-const empleado = await getEmpleado(Number.parseInt(id_empleado));
+const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 const puestos = await fetchData(`${url}puestos`);
 
 function isSelected(id){
@@ -30,6 +30,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Nombre"
 			value={empleado?.nombre}
+			pattern="\w"
+			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -47,6 +49,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Apellido paterno"
 			value={empleado?.apellido_paterno}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -64,6 +68,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Apellido materno"
 			value={empleado?.apellido_materno}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -131,6 +137,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Ciudad de Residencia"
 			value={empleado?.ciudad_residencia}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -149,6 +157,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Estado de Residencia"
 			value={empleado?.estado_residencia}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -186,6 +196,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Calle"
 			value={empleado?.calle}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -223,6 +235,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Estado Civil"
 			value={empleado?.estado_civil}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 		/>
 	</div>
 	<div class="col-span-6 sm:col-span-3">
@@ -237,7 +251,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			name="codigo_postal"
 			id="codigo_postal"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-			value={empleado?.codigo_postal}
+			value={empleado?.codigo_postal}pattern="[0-9]"
+			title="Solo numeros del 0 al 9 estan permitidos"
 			required
 		/>
 	</div>
@@ -254,6 +269,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			id="ciudad_origen"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.ciudad_origen}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 		/>
 	</div>
 	<div class="col-span-6 sm:col-span-3">
@@ -269,6 +286,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			id="estado_origen"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.estado_origen}
+			pattern="[A-Za-z]"
+			title="Solo letras de la A a la Z estan permitidas"
 		/>
 	</div>
 	<div class="col-span-6 sm:col-span-3">
@@ -303,6 +322,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			name="tel_casa"
 			id="tel_casa"
 			value={empleado?.tel_casa}
+			pattern="[0-9]"
+			title="Solo numeros del 0 al 9 estan permitidos"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 		/>
 	</div>
@@ -319,6 +340,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			id="tel_cel"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.tel_cel}
+			pattern="[0-9]{10}"
+			title="Solo numeros del 0 al 9 estan permitidos y debe ser de 10 digitos (con clave LADA)"
 			required
 		/>
 	</div>
@@ -335,6 +358,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			id="curp"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.curp}
+			pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)"
+			title="La curp debe ser de un formato valido"
 			required
 		/>
 	</div>
@@ -351,6 +376,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			id="rfc"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.rfc}
+			pattern="[ña-z]{3,4}[0-9]{6}[0-9a-z]{3}"
+			title="Debe ser un RFC valido con Homoclave (no escriba - antes de la homoclave)"
 			required
 		/>
 	</div>
@@ -368,6 +395,7 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.seguro_social}
 			required
+			pattern=""
 		/>
 	</div>
 	<div class="col-span-6 sm:col-span-3">

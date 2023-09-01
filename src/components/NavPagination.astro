@@ -49,7 +49,7 @@ const {next, prev, total_empleados, total_paginas, pagina_actual} = Astro.props
 		{
 			prev?
 			<a
-				href=`./empleados?page=${prev}`
+				href=`?page=${prev}`
 				class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 			>
 			<svg
@@ -69,7 +69,7 @@ const {next, prev, total_empleados, total_paginas, pagina_actual} = Astro.props
 		{
 			next?
 			<a
-			href=`./empleados?page=${next}`
+			href=`?page=${next}`
 			class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 			>
 			Siguiente
@@ -81,10 +81,9 @@ const {next, prev, total_empleados, total_paginas, pagina_actual} = Astro.props
 			><path
 			fill-rule="evenodd"
 			d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-			clip-rule="evenodd"></path></svg
-			>
+			clip-rule="evenodd"></path></svg>
 			</a>
-			:<></>
+			:<i></i>
 		}
 	</div>
 </nav-pagination>

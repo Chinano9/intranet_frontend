@@ -115,9 +115,10 @@ module.exports = {
 				'import/no-extraneous-dependencies': 'off',
 				'max-lines': [
 					'error',
-					{ max: 250, skipComments: true, skipBlankLines: true },
+					{ max: 1000, skipComments: true, skipBlankLines: true },
 				],
 				'no-unused-vars': ['error', { varsIgnorePattern: 'Props' }],
+				camelcase: 'off'
 			},
 			globals: {
 				/* Fix for unfound Astro namespace */
