@@ -1,10 +1,10 @@
 ---
 import LayoutSidebar from '../../../app/LayoutSidebar.astro'
-import EmpleadoDetalles from '../../../modules/EmpleadoDetalles.astro'
+import DetallesEmpleado from '../../../modules/DetallesEmpleado.astro'
 
 const {id} = Astro.params
 ---
 
 <LayoutSidebar>
-	<EmpleadoDetalles id_empleado={id}/>
+	<DetallesEmpleado id_empleado={id}/>
 </LayoutSidebar>

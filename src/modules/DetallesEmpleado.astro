@@ -1,14 +1,16 @@
 ---
-/* eslint max-lines: 'off' */
 import PictureUploader from '../components/PictureUploader.svelte';
 import FormEmpleado from './FormEmpleado.astro';
 import { getEmpleado } from '../lib/recursos_humanos';
-import Test from '../components/GetDocuments.svelte';
 import GetDocuments from '../components/GetDocuments.svelte';
+
+export interface Props {
+	id_empleado: string
+}
 
 const { id_empleado } = Astro.props;
 
-const empleado = await getEmpleado(Number.parseInt(id_empleado));
+const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 ---
 
 <div
@@ -133,7 +135,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<Test client:load id={id_empleado} documento='kardex'>Generar</Test>
+								<GetDocuments client:load id={id_empleado} documento='kardex'>Generar</GetDocuments>
 								<!-- </form> -->
 							</div>
 						</div>
@@ -164,7 +166,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<Test client:load id={id_empleado} documento='gafete'>Generar</Test>
+								<GetDocuments client:load id={id_empleado} documento='gafete'>Generar</GetDocuments>
 							</div>
 						</div>
 					</li>

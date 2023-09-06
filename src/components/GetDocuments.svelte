@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { getDocumentoEmpleado } from '../lib/recursos_humanos';
-	export let id: string;
+	export let id: string = '';
 	export let documento: string;
+
+	const urlParams = new URLSearchParams(window.location.search);
+	console.log(urlParams.toString());
+
 
 	function handleClick() {
 		let a = document.createElement('a');

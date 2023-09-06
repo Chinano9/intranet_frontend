@@ -1,13 +1,12 @@
 import {url, fetchData} from '../utils'
 import type { Empleado } from '../../types/recursos_humanos';
 
-const getEmpleados = async(query?:string, page?:string) => {
+const getEmpleados = async(params?:URLSearchParams) => {
 	console.log('getEmpleados');
 
-	let endpoint = `${url}empleados/?`;
-	if (query) endpoint += `query=${query}`;
-	console.log(query) 
-	if (page) endpoint += `page=${page}`; 
+	const queryString = params?.toString();
+
+	const endpoint = `${url}empleados/?${queryString}`;
 
 	const request:RequestInit = {
 		method: 'GET'

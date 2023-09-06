@@ -1,4 +1,5 @@
 import { API_URL } from "../app/constants";
+
 const ENDPOINT = 'recursos_humanos/';
 
 export const url = `${API_URL}${ENDPOINT}`;
