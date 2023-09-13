@@ -6,7 +6,7 @@
 	export let id_empleado: any;
 	let visible = true
 
-	async function handleUpload(e){
+	async function handleUpload(e:any){
 		const formData = new FormData();
     formData.append('foto', e.target[0].files[0]);
 		const endpoint = `${url}empleados/${id_empleado}`;
@@ -25,7 +25,7 @@
 </script>
 
 <img
-	class="mb-4 rounded-lg w-28 sm:mb-0 xl:mb-4 2xl:mb-0 font-bold text-gray-900 dark:text-white"
+	class="mb-4 rounded-lg w-28 sm:mb-0 xl:mb-4 2xl:mb-0 font-bold text-gray-900 dark:text-white mr-4"
 	src={foto_url}
 	alt="Foto de empleado"
 />

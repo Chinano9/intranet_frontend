@@ -135,7 +135,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<GetDocuments client:load id={id_empleado} documento='kardex'>Generar</GetDocuments>
+								<GetDocuments client:only id={id_empleado} documento='kardex'>Generar</GetDocuments>
 								<!-- </form> -->
 							</div>
 						</div>
@@ -166,7 +166,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<GetDocuments client:load id={id_empleado} documento='gafete'>Generar</GetDocuments>
+								<GetDocuments client:only id={id_empleado} documento='gafete'>Generar</GetDocuments>
 							</div>
 						</div>
 					</li>
@@ -196,7 +196,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<GetDocuments client:load id={id_empleado} documento='contrato_determinado'>Generar</GetDocuments>
+								<GetDocuments client:only id={id_empleado} documento='contrato_determinado'>Generar</GetDocuments>
 							</div>
 						</div>
 					</li>
@@ -226,13 +226,13 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 								</span>
 							</div>
 							<div class="inline-flex items-center">
-								<GetDocuments client:load id={id_empleado} documento='contrato_indeterminado'>Generar</GetDocuments>
+								<GetDocuments client:only id={id_empleado} documento='contrato_indeterminado'>Generar</GetDocuments>
 							</div>
 						</div>
 					</li>
 				</ul>
 				<div>
-					<GetDocuments client:load id={id_empleado} documento='exportar_csv'>Exportar datos a CSV</GetDocuments>
+					<GetDocuments client:only id={id_empleado} documento='exportar_csv'>Exportar datos a CSV</GetDocuments>
 				</div>
 			</div>
 		</div>
@@ -289,7 +289,7 @@ const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
 						button.href= URL.createObjectURL(blob);
 
 						console.log('SI SE DA CLICK OMG!');
-						button.download;
+						button.downonly;
 						return 'exito';
 					} else {
 						// La solicitud falló
