@@ -1,6 +1,8 @@
-import { sequence } from '';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { sequence, defineMiddleware } from 'astro:middleware';
+import jwt from 'jsonwebtoken';
 // `context` and `next` are automatically typed
-const passthroughRoutes = ['/sign-in', '/'];
+const passthroughRoutes = ['/sign-in', '/', '/401', '/500', '/404'];
 
 function skipMiddleware(urlPathname: string) {
 	let shouldSkip = false;
@@ -16,13 +18,37 @@ function skipMiddleware(urlPathname: string) {
   return shouldSkip;
 }
 
-async function isAuthenticated({locals}, next:Function) {
-	locals.user.isAuthenticated
-	return next();
-}
 
-async function hasPermisions({locals}, next) {
+const isAuthenticated = defineMiddleware(({ locals, request, redirect }, next) => {
+	const url = request.url.split('/') 
+	console.log(url)
+	if(skipMiddleware('/'+url[3])) return next();
+	const {accessToken} = locals;
+	console.log('isAuth?')
+
+	if (!accessToken) {
+			return redirect('/401', 308);
+	}
 	
+	try {
+		// Verificar y decodificar el token JWT utilizando la clave secreta
+
+		// Aquí podrías realizar más validaciones basadas en la información del token decodificado
+
+		// Agrega información de usuario autenticado al objeto locals si es necesario.
+		locals.userAuthenticated = true;
+
+		// Llama a next() para continuar con el flujo de ejecución.
+		return next();
+	} catch (error) {
+		return {
+				status: 401,
+				body: { message: 'Acceso no autorizado. Token de acceso no válido.' }
+		};
+	}
+})
+async function hasPermisions({locals}, next) {
+	return next();
 }
 
 

@@ -18,6 +18,7 @@ const getEmpleados = async(params?:URLSearchParams) => {
 
 const postEmpleado = async(body:Empleado) => {
 	console.log('postEmpleado');
+	console.log(body)
 
 	const endpoint = `${url}empleados/nuevo/`;
 
@@ -82,7 +83,6 @@ export {
 	getEmpleados,
 	postEmpleado,
 	patchEmpleado,
-	patchFotoEmpleado,
 	deleteEmpleado,
 	getEmpleado
 }
