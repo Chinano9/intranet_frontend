@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { sequence, defineMiddleware } from 'astro:middleware';
+import { sequence } from 'astro:middleware';
 import jwt from 'jsonwebtoken';
 // `context` and `next` are automatically typed
 const passthroughRoutes = ['/sign-in', '/', '/401', '/500', '/404'];
@@ -52,4 +51,4 @@ async function hasPermisions({locals}, next) {
 }
 
 
-export const onRequest = sequence(isAuthenticated, hasPermisions);
+export const onRequest = sequence(isAuthenticated)
