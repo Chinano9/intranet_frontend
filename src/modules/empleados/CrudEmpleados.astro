@@ -1,11 +1,11 @@
 ---
 /* eslint max-lines: 'off' */
 
-import NavPagination from '../components/NavPagination.astro';
+import NavPagination from '../../components/NavPagination.astro';
 import FormEmpleado from './FormEmpleado.astro';
-import { getEmpleados } from '../lib/recursos_humanos/index.js';
-import GetDocuments from '../components/GetDocuments.svelte';
-import Search from '../components/Search.svelte';
+import { getEmpleados } from '../../lib/recursos_humanos/index.js';
+import GetDocuments from '../../components/GetDocuments.svelte';
+import Search from '../../components/Search.svelte';
 
 const query = Astro.url.searchParams
 const { class: clazz } = Astro.props;

@@ -41,7 +41,7 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 		);
 	} catch (error) {
 		console.error('Error al actualizar empleado: ', error);
-		return redirect('/500', 301)
+		return redirect('/error/500', 301)
 	}
 	return redirect(`/recursos_humanos/empleado/${empleado}`, 308);
 };
