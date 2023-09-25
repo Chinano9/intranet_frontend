@@ -9,7 +9,7 @@ import {
 // o en su defecto, la ruta de la API en django
 export const get: APIRoute = async ({ params, request, redirect }) => {
 	const { puesto } = params;
-	const body = await deletePuesto(Number.parseInt(puesto ? puesto : ''));
+	await deletePuesto(Number.parseInt(puesto??'', 10));
 
 	return redirect('/recursos_humanos/puestos/', 308)
 };
@@ -28,13 +28,13 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 	// console.count("patch")
 
 	try {
-		const body = await patchPuesto(
-			Number.parseInt(puesto, 10),
+		await patchPuesto(
+			Number.parseInt(puesto??'', 10),
 			json
 		);
 	} catch (error) {
 		console.error('Error al actualizar puesto: ', error);
 		return redirect('/error/500', 301)
 	}
-	return redirect(`/recursos_humanos/puesto/${puesto}`, 308);
+	return redirect(`/recursos_humanos/puesto/${puesto??''}`, 308);
 };
