@@ -2,7 +2,7 @@ import { API_URL } from "../app/constants";
 
 const ENDPOINT = 'recursos_humanos/';
 
-export const url = `${API_URL?API_URL:'http://localhost:8000/api'}${ENDPOINT}`;
+export const url = `${API_URL}${ENDPOINT}`;
 
 export async function fetchData(endpoint: string, request?: RequestInit) {
 	try {

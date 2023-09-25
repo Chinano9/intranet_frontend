@@ -6,7 +6,7 @@ const getEmpleados = async(params?:URLSearchParams) => {
 
 	const queryString = params?.toString();
 
-	const endpoint = `${url}empleados/?${queryString}`;
+	const endpoint = `${url}empleados/?${queryString ?? ''}`;
 
 	const request:RequestInit = {
 		method: 'GET'

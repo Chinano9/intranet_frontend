@@ -37,7 +37,7 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 	try {
 		const body = await patchEmpleado(
 			Number.parseInt(empleado),
-			json,
+			json
 		);
 	} catch (error) {
 		console.error('Error al actualizar empleado: ', error);

@@ -1,9 +1,12 @@
 import { url } from '../utils';
 
-const DOCS_ROUTE = url + 'empleados/documentos/';
+const DOCS_ROUTE = `${url}empleados/documentos/`;
 
 export const getDocumentoEmpleado = async (documento: string,num_empleado?: string,query?: string|undefined) => {
-	let doc = `${DOCS_ROUTE}${documento}/${num_empleado?num_empleado:''}`;
+	if(!num_empleado){
+		num_empleado = `?${query??''}`
+	}
+	let doc = `${DOCS_ROUTE}${documento}/${num_empleado??''}`;
 
 	if(query){
 		doc += `?${query}`
@@ -24,6 +27,6 @@ export const getDocumentoEmpleado = async (documento: string,num_empleado?: stri
 	
 	} catch (error:any) {
 		console.error('Error:', error);
-		throw new Error(`Error en la solicitud ${error}`);
+		throw new Error(`Error en la solicitud: ${error??'Error desconocido'}`);
 	}
 };

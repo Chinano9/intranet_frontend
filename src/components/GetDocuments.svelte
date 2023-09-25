@@ -8,7 +8,7 @@
 
 	function handleClick() {
 		let a = document.createElement('a');
-		getDocumentoEmpleado(documento, id)
+		getDocumentoEmpleado(documento, id, urlParams.toString())
 			.then((url) => {
 				//Si la request es exitosa se descarga el documento
 				document.body.append(a);

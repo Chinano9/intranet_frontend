@@ -1,0 +1,10 @@
+---
+import LayoutSidebar from '../../../app/layouts/LayoutSidebar.astro'
+import DetallesPuesto from '../../../modules/puestos/DetallesPuesto.astro'
+
+const {id} = Astro.params??'1';
+---
+
+<LayoutSidebar>
+	<DetallesPuesto id_puesto={id}/>
+</LayoutSidebar>

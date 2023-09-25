@@ -3,7 +3,7 @@ import { getPuesto } from '../../lib/recursos_humanos';
 
 const { id_puesto } = Astro.props;
 
-const puesto = await getPuesto(Number.parseInt(id_puesto, 10));;
+const puesto = await getPuesto(Number.parseInt(id_puesto, 10));
 ---
 <!-- cOMPROBAR LENGHT DE LOS CAMPOS Y REGEX DE LETRAS Y NUMEROS -->
 <p 
@@ -24,8 +24,6 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Nombre"
 			value={puesto?.nombre}
-			pattern="[A-ZÑa-zñ\s]{2,50}"
-			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -40,9 +38,8 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			name="responsabilidad"
 			id="responsabilidad"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-			placeholder="Apellido paterno"
-			value={puesto?.responsabilidad}
-			title="Solo letras de la A a la Z estan permitidas"
+			placeholder="Responsabilidad"
+			set:text={puesto?.responsabilidad}
 			required
 		/>
 	</div>

@@ -2,6 +2,8 @@
 import NavButton from "./NavButton.svelte";
 
 const {next, prev, total_empleados, total_paginas, pagina_actual} = Astro.props
+
+console.log()
 ---
 
 <nav-pagination
@@ -43,7 +45,7 @@ const {next, prev, total_empleados, total_paginas, pagina_actual} = Astro.props
 				>{pagina_actual}</span
 			> de <span class="font-semibold text-gray-900 dark:text-white">{total_paginas}</span
 			>
-			(Empleados: {total_empleados})
+			(Total: {total_empleados})
 			</span
 		>
 	</div>

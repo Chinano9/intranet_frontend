@@ -5,7 +5,8 @@ import { fetchData, url } from '../../lib/utils';
 const { id_empleado } = Astro.props;
 
 const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
-const puestos = await fetchData(`${url}puestos`);
+const {results} = await fetchData(`${url}puestos/?page_size=1000`);
+const puestos = results;
 
 function isSelected(id:any){
 	return empleado?.puesto == id;
@@ -137,8 +138,6 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Ciudad de Residencia"
 			value={empleado?.ciudad_residencia}
-
-			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -157,8 +156,6 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			placeholder="Estado de Residencia"
 			value={empleado?.estado_residencia}
-
-			title="Solo letras de la A a la Z estan permitidas"
 			required
 		/>
 	</div>
@@ -402,7 +399,7 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 			placeholder="XXX-XX-XX-XXX-X"
 			class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
 			value={empleado?.seguro_social}
-			pattern="[0-9]{3}\-{1}[0-9]{2}\-{1}[0-9]{2}\-{1}[0-9]{3}\-{1}[0-9]{1}"
+			pattern="[0-9]{3}\-{1}?[0-9]{2}\-{1}?[0-9]{2}\-{1}?[0-9]{3}\-{1}?[0-9]{1}"
 			title="El seguro social debe estar escrito con el siguiente formato: XXX-XX-XX-XXX-X;"
 			required
 		/>

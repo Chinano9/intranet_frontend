@@ -6,7 +6,8 @@
 
 	function handleClick() {
 		urlParams.set('page', page);
-		window.location.replace(`..${window.location.pathname}?${urlParams.toString()}`);
+		window.location.replace(`${window.location.pathname}?${urlParams.toString()}`);
+		console.log(window.location.pathname)
 	}
 </script>
 

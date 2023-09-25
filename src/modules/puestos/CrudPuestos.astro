@@ -180,24 +180,6 @@ const puestos = queryset.results
 									scope="col"
 									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
 								>
-									Fecha de nacimiento
-								</th>
-								<th
-									scope="col"
-									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-								>
-									Fecha de contratacion
-								</th>
-								<th
-									scope="col"
-									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-								>
-									Localizacion
-								</th>
-								<th
-									scope="col"
-									class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-								>
 									Puesto
 								</th>
 								<th
@@ -216,33 +198,14 @@ const puestos = queryset.results
 									<div>
 										<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
 											<td class="flex justify-start items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-												<img
-													class="w-10 h-10 rounded-full text-xs"
-													src={puesto.foto_url}
-													alt={`Foto`}
-												/>
 												<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
 													<a href={`/recursos_humanos/puesto/${puesto.id}`} class="text-base font-semibold text-gray-900 dark:text-white">
-														{puesto.nombre} {puesto.apellido_paterno} {puesto.apellido_materno}
+														{puesto.nombre}
 													</a>
-													<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-														{puesto.email}
-													</div>
 												</div>
 											</td>
 											<td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-												{puesto.fecha_nacimiento}
-											</td>
-											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-												{puesto.fecha_contratacion}
-											</td>
-											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-												{puesto.ciudad_residencia} {puesto.estado_residencia}. {puesto.codigo_postal}
-											</td>
-											<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-												<div class="flex items-center">
-													{puesto.puesto.nombre}
-												</div>
+												{puesto.responsabilidad}
 											</td>
 											<td class="p-4 space-x-2 whitespace-nowrap">
 												<a
@@ -562,6 +525,6 @@ const puestos = queryset.results
 		</div>
 	</div>
 
-	<NavPagination next={queryset.next} prev={queryset.prev} total_puestos={queryset.total_puestos} total_paginas={queryset.total_paginas} pagina_actual={queryset.pagina_actual}/>
+	<NavPagination next={queryset.next} prev={queryset.prev} total_empleados={queryset.total_puestos} total_paginas={queryset.total_paginas} pagina_actual={queryset.pagina_actual}/>
 
 </entities-crud>
