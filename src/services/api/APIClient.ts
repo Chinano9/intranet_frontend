@@ -26,7 +26,7 @@ class APIClient<T> implements CRUDOperations<T> {
   }
 
   async create(data: T): Promise<T> {
-    const endpoint = this.getResourceUrl();
+    const endpoint = `${this.getResourceUrl()}/nuevo/`;
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {

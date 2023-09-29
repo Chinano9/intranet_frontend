@@ -3,14 +3,14 @@
 
 import NavPagination from '../../components/NavPagination.astro';
 import FormPuesto from './FormPuesto.astro';
-import { getPuestos } from '../../lib/recursos_humanos/index.js';
+import { puestosAPI } from '../../services';
 import GetDocuments from '../../components/GetDocuments.svelte';
 import Search from '../../components/Search.svelte';
 
 const query = Astro.url.searchParams
 const { class: clazz } = Astro.props;
-const queryset = await getPuestos(query);
-const puestos = queryset.results
+const queryset = await puestosAPI.getAll(query);
+const puestos = queryset.results;
 ---
 
 <entities-crud

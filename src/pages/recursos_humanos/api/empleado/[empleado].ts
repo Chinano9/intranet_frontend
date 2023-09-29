@@ -2,10 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import type { APIRoute } from 'astro';
-import {
-	patchEmpleado,
-	deleteEmpleado,
-} from '../../../../lib/recursos_humanos';
+import { empleadosAPI } from '../../../../services';
 import { NumeroALetras } from '../../../../lib/numeros-a-letras';
 import type { Empleado } from '../../../../types/recursos_humanos';
 
@@ -14,7 +11,7 @@ import type { Empleado } from '../../../../types/recursos_humanos';
 // o en su defecto, la ruta de la API en django
 export const get: APIRoute = async ({ params, redirect }) => {
 	const { empleado } = params;
-	await deleteEmpleado(Number.parseInt(empleado??'', 10));
+	await empleadosAPI.delete(Number.parseInt(empleado??'', 10));
 
 	return redirect('/recursos_humanos/empleados/', 308)
 };
@@ -38,7 +35,7 @@ export const post: APIRoute = async ({ params, request, redirect }) => {
 	// console.count("patch")
 
 	try {
-		await patchEmpleado(
+		await empleadosAPI.update(
 			Number.parseInt(empleado??'', 10),
 			json
 		);

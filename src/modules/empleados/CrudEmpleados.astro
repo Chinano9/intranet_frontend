@@ -3,13 +3,13 @@
 
 import NavPagination from '../../components/NavPagination.astro';
 import FormEmpleado from './FormEmpleado.astro';
-import { getEmpleados } from '../../lib/recursos_humanos/index.js';
 import GetDocuments from '../../components/GetDocuments.svelte';
 import Search from '../../components/Search.svelte';
+import { empleadosAPI } from '../../services';
 
 const query = Astro.url.searchParams
 const { class: clazz } = Astro.props;
-const queryset = await getEmpleados(query);
+const queryset = await empleadosAPI.getAll(query);
 const empleados = queryset.results
 ---
 
