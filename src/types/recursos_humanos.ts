@@ -1,5 +1,13 @@
-export type Empleados = Empleado[];
+export type Empleados = {
+	pagina_actual: number;
+	total_paginas: number;
+	total_empleados: number;
+	next: number;
+	prev: number;
+	results: Empleado[];
+}
 export interface Empleado {
+	id: string | number;
   nombre: string;
   apellido_paterno: string;
   apellido_materno?: string | null;

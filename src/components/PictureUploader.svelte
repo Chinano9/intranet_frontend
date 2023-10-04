@@ -15,6 +15,7 @@
       await axios.patch(endpoint, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+					'Access-Control-Allow-Origin':'*',
         },
       });
 			location.reload()

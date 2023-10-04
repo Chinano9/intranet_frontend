@@ -1,12 +1,16 @@
 ---
 import { getEmpleado } from '../../lib/recursos_humanos';
 import { fetchData, url } from '../../lib/utils';
-
+import { empleadosAPI } from '../../services';
+import type { Empleado } from '../../types/recursos_humanos';
 const { id_empleado } = Astro.props;
 
-const empleado = await getEmpleado(Number.parseInt(id_empleado, 10));
-const {results} = await fetchData(`${url}puestos/?page_size=1000`);
+const empleado = await empleadosAPI.getOne(Number.parseInt(id_empleado, 10));
+let {results} = await fetchData(`${url}puestos/?page_size=1000`);
 const puestos = results;
+const query = new URLSearchParams({'es_jefe':'True'});
+({results} = await empleadosAPI.getAll(query));
+const jefes = results;
 
 function isSelected(id:any){
 	return empleado?.puesto == id;
@@ -207,6 +211,23 @@ class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 		>
 			Jefe Directo
 		</label>
+			<label
+				for="jefe_directo"
+				class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+			>
+				Jefe directo
+			</label>
+			<select 
+				name="jefe_directo" 
+				id="jefe_directo"
+				class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+				required
+				>
+				{jefes.map((jefe:Empleado) => (
+						<option value=`${jefe.id}` selected={isSelected(jefe.id)} >{jefe.nombre} {jefe.apellido_paterno} {jefe.apellido_paterno}</option>
+				))}
+	
+			</select>
 		<input
 			type="text"
 			name="jefe_directo"

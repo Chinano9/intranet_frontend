@@ -1,4 +1,4 @@
-export const API_URL = import.meta.env.API_BASE_URL ?? 'http://localhost:8000/api/';
+export const API_URL = import.meta.env.API_BASE_URL ?? 'https://a91a-187-190-5-174.ngrok-free.app/api/';
 
 export const REMOTE_ASSETS_BASE_URL = `https://flowbite-admin-dashboard.vercel.app`;
 
